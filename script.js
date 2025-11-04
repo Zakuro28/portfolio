@@ -22,16 +22,21 @@ const appearOnScroll = new IntersectionObserver(
 
 fadeElements.forEach(el => appearOnScroll.observe(el));
 
-// ====== TYPING EFFECT ======
+// ====== TYPING EFFECT (Slower & Smooth Version) ======
 const typingElement = document.querySelector(".typing");
 const roles = ["Web Developer", "Frontend Designer", "Freelancer", "Tech Enthusiast"];
 let roleIndex = 0;
 let charIndex = 0;
 let isDeleting = false;
-let typingSpeed = 100;
+
+// Slower typing and deleting speed
+const typingSpeed = 150;
+const deletingSpeed = 100;
+const pauseTime = 1500; // pause between roles
 
 function typeEffect() {
   const currentRole = roles[roleIndex];
+
   if (isDeleting) {
     typingElement.textContent = currentRole.substring(0, charIndex--);
   } else {
@@ -39,20 +44,23 @@ function typeEffect() {
   }
 
   if (!isDeleting && charIndex === currentRole.length) {
-    isDeleting = true;
-    typingSpeed = 120;
+    // Pause when full word is shown
+    setTimeout(() => {
+      isDeleting = true;
+    }, pauseTime);
   } else if (isDeleting && charIndex === 0) {
+    // Move to next word
     isDeleting = false;
     roleIndex = (roleIndex + 1) % roles.length;
-    typingSpeed = 100;
   }
 
-  setTimeout(typeEffect, typingSpeed);
+  setTimeout(typeEffect, isDeleting ? deletingSpeed : typingSpeed);
 }
 
 if (typingElement) {
   typeEffect();
 }
+
 /* ====== RGB LIGHTS MOUSE INTERACTION ====== */
 (function() {
   const lights = document.querySelector('.rgb-lights');

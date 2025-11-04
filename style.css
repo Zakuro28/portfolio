@@ -317,14 +317,13 @@ footer {
 /* ====== ANIMATIONS ====== */
 .fade-in {
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 1s ease-out, transform 1s ease-out;
+  transition: opacity 1.2s ease-out;
 }
 
 .fade-in.visible {
   opacity: 1;
-  transform: translateY(0);
 }
+
 
 /* ===== MY WORK SECTION ===== */
 .work {
@@ -381,4 +380,25 @@ footer {
   color: #bbb;
   font-size: 0.9rem;
   padding: 0 15px 20px;
+}
+
+.contact-info {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.contact-info p {
+  margin: 0.5rem 0;
+  color: #aaa;
+}
+
+.contact-info a {
+  color: #00bfff;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.contact-info a:hover {
+  color: #0095cc;
+  text-decoration: underline;
 }
