@@ -1,114 +1,97 @@
-import { useRef, useLayoutEffect } from 'react';
+﻿import { useRef, useLayoutEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Heart, Home, BookOpen, Shield, Users } from 'lucide-react';
+import { FileText, Users, Gauge } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const volunteerWork = [
+const summaryHighlights = [
   {
-    icon: Home,
-    title: 'Gawad Kalinga UPD Build Project',
-    year: '2016',
-    description: 'Contributed to community building efforts for underprivileged families.',
-  },
-  {
-    icon: BookOpen,
-    title: 'UPD NSTP Lecturer',
-    subtitle: 'Basic Life Saving and Disaster Risk Reduction and Management',
-    year: '2018',
-    description: 'Educated students on emergency response and safety protocols.',
+    icon: FileText,
+    title: 'Professional Profile',
+    description:
+      'Versatile and results-driven with hands-on experience in web development, QA testing, e-commerce, analytics, and general operations.',
   },
   {
     icon: Users,
-    title: 'Ugnayan ng Pahinungod Diliman',
-    subtitle: 'Tutorials Sessions Program',
-    year: '2019',
-    description: 'Provided academic support to students from marginalized communities.',
+    title: 'Collaboration & Communication',
+    description:
+      'Strong at coordinating tasks, managing projects, supporting teams, and translating requirements into practical technical execution.',
   },
   {
-    icon: Shield,
-    title: 'Ugnayan ng Pahinungod Diliman',
-    subtitle: 'Community-Based Disaster Risk Reduction and Management',
-    year: '',
-    description: 'Assisted in community preparedness and disaster response initiatives.',
+    icon: Gauge,
+    title: 'Quality & Efficiency',
+    description:
+      'Focused on reliable delivery, process improvement, and continuous learning across both technical and non-technical responsibilities.',
   },
-];
-
-const causes = [
-  { name: 'Environment & Climate', icon: Heart },
-  { name: "Children's Rights", icon: Users },
-  { name: 'Education Access', icon: BookOpen },
-  { name: 'Community Development', icon: Home },
 ];
 
 const VolunteerSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const headlineRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
-  const causesRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       const isDesktop = window.matchMedia('(min-width: 1024px)').matches;
 
-      // Headline reveal
       gsap.fromTo(
         headlineRef.current,
-        { y: 30, opacity: 0 },
         {
-          y: 0,
+          opacity: 0,
+          y: 72,
+          clipPath: 'inset(40% 0 0 0)',
+          filter: 'blur(10px)',
+        },
+        {
           opacity: 1,
-          duration: 0.8,
-          ease: 'power2.out',
+          y: 0,
+          clipPath: 'inset(0% 0 0 0)',
+          filter: 'blur(0px)',
+          duration: 0.95,
+          ease: 'power3.out',
           scrollTrigger: {
             trigger: headlineRef.current,
-            start: isDesktop ? 'top 80%' : 'top 88%',
-            end: isDesktop ? 'top 50%' : 'top 68%',
-            scrub: isDesktop ? 0.4 : false,
+            start: isDesktop ? 'top 88%' : 'top 93%',
+            end: isDesktop ? 'top 58%' : 'top 73%',
+            scrub: isDesktop ? 0.45 : false,
           },
         }
       );
 
-      // Cards reveal
-      cardsRef.current.forEach((card) => {
-        if (card) {
-          gsap.fromTo(
-            card,
-            { y: 40, opacity: 0 },
-            {
-              y: 0,
-              opacity: 1,
-              duration: 0.6,
-              ease: 'power2.out',
-              scrollTrigger: {
-                trigger: card,
-                start: isDesktop ? 'top 90%' : 'top 92%',
-                end: isDesktop ? 'top 65%' : 'top 74%',
-                scrub: isDesktop ? 0.4 : false,
-              },
-            }
-          );
-        }
+      cardsRef.current.forEach((card, index) => {
+        if (!card) return;
+        gsap.fromTo(
+          card,
+          {
+            opacity: 0,
+            y: 95,
+            x: index === 1 ? 0 : index === 0 ? -26 : 26,
+            rotateX: 18,
+            rotateY: index === 1 ? 0 : index === 0 ? -16 : 16,
+            scale: 0.86,
+            filter: 'blur(7px)',
+            transformPerspective: 1200,
+          },
+          {
+            opacity: 1,
+            y: 0,
+            x: 0,
+            rotateX: 0,
+            rotateY: 0,
+            scale: 1,
+            filter: 'blur(0px)',
+            duration: 1,
+            ease: 'expo.out',
+            scrollTrigger: {
+              trigger: card,
+              start: isDesktop ? 'top 94%' : 'top 98%',
+              end: isDesktop ? 'top 66%' : 'top 79%',
+              scrub: isDesktop ? 0.52 : false,
+            },
+          }
+        );
       });
-
-      // Causes reveal
-      gsap.fromTo(
-        causesRef.current,
-        { y: 30, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.6,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: causesRef.current,
-            start: isDesktop ? 'top 90%' : 'top 92%',
-            end: isDesktop ? 'top 65%' : 'top 74%',
-            scrub: isDesktop ? 0.4 : false,
-          },
-        }
-      );
     }, sectionRef);
 
     return () => ctx.revert();
@@ -120,76 +103,37 @@ const VolunteerSection = () => {
       id="volunteer"
       className="relative bg-[#0a0a0f] py-[10vh] px-[6vw]"
       style={{
-        background: 'radial-gradient(ellipse at 30% 50%, rgba(168,85,247,0.05) 0%, transparent 40%)',
+        background: 'radial-gradient(ellipse at 30% 50%, rgba(112,130,56,0.05) 0%, transparent 40%)',
       }}
     >
-      {/* Headline */}
       <div ref={headlineRef} className="text-center mb-12">
-        <span className="font-mono text-xs tracking-[0.2em] uppercase text-[#a855f7] block mb-2">
-          Service
+        <span className="font-mono text-xs tracking-[0.2em] uppercase text-[#708238] block mb-2">
+          Summary
         </span>
         <h2 className="text-[clamp(34px,3.6vw,52px)] font-bold text-gradient mb-4">
-          Volunteer Expertise
+          Professional Summary
         </h2>
-        <p className="text-[#a78bfa]/70 text-[clamp(14px,1.1vw,17px)] max-w-2xl mx-auto leading-relaxed">
-          Giving back to the community through meaningful volunteer work and advocacy.
+        <p className="text-[#a3b97a]/70 text-[clamp(14px,1.1vw,17px)] max-w-2xl mx-auto leading-relaxed">
+          Snapshot of strengths, approach, and working style.
         </p>
       </div>
 
-      {/* Volunteer Cards */}
-      <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-        {volunteerWork.map((work, index) => (
+      <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+        {summaryHighlights.map((item, index) => (
           <div
-            key={work.title}
-            ref={(el) => { cardsRef.current[index] = el; }}
-            className="group p-6 rounded-2xl card-glass hover:bg-purple-500/10 transition-all duration-300"
+            key={item.title}
+            ref={(el) => {
+              cardsRef.current[index] = el;
+            }}
+            className="group p-6 rounded-2xl card-glass hover:bg-[#708238]/10 transition-all duration-300"
           >
-            <div className="flex items-start gap-4">
-              <div className="p-3 rounded-xl bg-purple-500/10 text-[#a855f7] group-hover:bg-[#a855f7] group-hover:text-[#0a0a0f] transition-colors">
-                <work.icon size={22} />
-              </div>
-              <div className="flex-1">
-                <div className="flex items-center gap-2 mb-1">
-                  <h3 className="text-[#f3e8ff] font-semibold">{work.title}</h3>
-                  {work.year && (
-                    <span className="text-[#a855f7] font-mono text-xs">{work.year}</span>
-                  )}
-                </div>
-                {work.subtitle && (
-                  <p className="text-[#a855f7] text-sm mb-2">{work.subtitle}</p>
-                )}
-                <p className="text-[#a78bfa]/70 text-sm leading-relaxed">
-                  {work.description}
-                </p>
-              </div>
+            <div className="p-3 rounded-xl bg-[#708238]/10 text-[#708238] mb-4 w-fit">
+              <item.icon size={22} />
             </div>
+            <h3 className="text-[#f2f6e8] font-semibold mb-2">{item.title}</h3>
+            <p className="text-[#a3b97a]/80 text-sm leading-relaxed">{item.description}</p>
           </div>
         ))}
-      </div>
-
-      {/* Causes */}
-      <div ref={causesRef} className="max-w-3xl mx-auto">
-        <p className="text-center text-[#a78bfa]/70 text-sm mb-6">
-          Causes I am passionate about
-        </p>
-        <div className="flex flex-wrap justify-center gap-3">
-          {causes.map((cause) => (
-            <div
-              key={cause.name}
-              className="flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20 hover:bg-purple-500/20 transition-colors"
-            >
-              <cause.icon size={14} className="text-[#a855f7]" />
-              <span className="text-sm text-[#c4b5fd]">{cause.name}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Quote */}
-      <div className="max-w-2xl mx-auto mt-12 text-center">
-        <blockquote className="text-[#c4b5fd]/80 italic text-lg leading-relaxed">
-          "Determined, disciplined, and deeply compassionate, I continue to strive for excellence in every aspect of my life, driven by a commitment to my values and goals."
-        </blockquote>
       </div>
     </section>
   );

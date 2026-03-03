@@ -1,7 +1,6 @@
-import { useEffect, useRef, useLayoutEffect, useState } from 'react';
+﻿import { useEffect, useRef, useLayoutEffect, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ChevronDown, Play } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -66,13 +65,12 @@ const HeroSection = () => {
   const contentRef = useRef<HTMLDivElement>(null);
   const butterflyButtonRef = useRef<HTMLButtonElement>(null);
   const butterflyRef = useRef<HTMLImageElement>(null);
-  const roanRef = useRef<HTMLHeadingElement>(null);
+  const nameRef = useRef<HTMLHeadingElement>(null);
   const valuesRef = useRef<HTMLDivElement>(null);
-  const introButtonRef = useRef<HTMLAnchorElement>(null);
   const swarmTimeoutRef = useRef<number | null>(null);
   const [swarmButterflies, setSwarmButterflies] = useState<SwarmButterfly[]>([]);
   const [showSwarmOverlay, setShowSwarmOverlay] = useState(false);
-  const [showMoreIntro, setShowMoreIntro] = useState(false);
+  const [showInfo, setShowInfo] = useState(false);
 
   // Entrance animation on load
   useEffect(() => {
@@ -111,13 +109,6 @@ const HeroSection = () => {
         0.6
       );
 
-      tl.fromTo(
-        introButtonRef.current,
-        { opacity: 0, y: 20, scale: 0.95 },
-        { opacity: 1, y: 0, scale: 1, duration: 0.6 },
-        0.58
-      );
-
     }, sectionRef);
 
     return () => ctx.revert();
@@ -137,55 +128,69 @@ const HeroSection = () => {
             pin: true,
             scrub: 0.5,
             onLeaveBack: () => {
-              gsap.set([imageRef.current, contentRef.current, butterflyRef.current, valuesRef.current, introButtonRef.current], {
+              gsap.set([imageRef.current, contentRef.current, butterflyRef.current, valuesRef.current], {
                 opacity: 1,
                 x: 0,
                 y: 0,
                 scale: 1,
+                rotateY: 0,
+                rotateX: 0,
+                rotate: 0,
+                filter: 'blur(0px)',
               });
             },
           },
         });
 
-        // EXIT (70% - 100%)
+        // EXIT (70% - 100%) - 3D peel transition
         scrollTl.fromTo(
           butterflyRef.current,
-          { opacity: 1, y: 0 },
-          { opacity: 0, y: -50, ease: 'power2.in' },
-          0.7
+          { opacity: 1, y: 0, rotate: 0, scale: 1, filter: 'blur(0px)' },
+          { opacity: 0, y: -85, rotate: 28, scale: 0.7, filter: 'blur(5px)', ease: 'power3.inOut' },
+          0.66
         );
 
         scrollTl.fromTo(
           imageRef.current,
-          { opacity: 1, x: 0, scale: 1 },
-          { opacity: 0, x: '-20vw', scale: 0.9, ease: 'power2.in' },
-          0.7
+          { opacity: 1, x: 0, y: 0, scale: 1, rotateY: 0, rotateX: 0, filter: 'blur(0px)' },
+          {
+            opacity: 0,
+            x: '-26vw',
+            y: '-5vh',
+            scale: 0.76,
+            rotateY: -34,
+            rotateX: 8,
+            filter: 'blur(7px)',
+            ease: 'expo.inOut',
+          },
+          0.68
         );
 
         scrollTl.fromTo(
           contentRef.current,
-          { opacity: 1, x: 0 },
-          { opacity: 0, x: '20vw', ease: 'power2.in' },
-          0.72
+          { opacity: 1, x: 0, y: 0, rotateY: 0, filter: 'blur(0px)' },
+          {
+            opacity: 0,
+            x: '26vw',
+            y: '-4vh',
+            rotateY: 16,
+            filter: 'blur(7px)',
+            ease: 'expo.inOut',
+          },
+          0.7
         );
 
         scrollTl.fromTo(
           valuesRef.current,
-          { opacity: 1, y: 0 },
-          { opacity: 0, y: 30, ease: 'power2.in' },
-          0.75
-        );
-
-        scrollTl.fromTo(
-          introButtonRef.current,
-          { opacity: 1, y: 0, scale: 1 },
-          { opacity: 0, y: 20, scale: 0.92, ease: 'power2.in' },
+          { opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' },
+          { opacity: 0, y: 62, scale: 0.86, filter: 'blur(4px)', ease: 'power3.inOut' },
           0.74
         );
+
       });
 
       mm.add('(max-width: 1023px)', () => {
-        gsap.set([imageRef.current, contentRef.current, butterflyRef.current, valuesRef.current, introButtonRef.current], {
+        gsap.set([imageRef.current, contentRef.current, butterflyRef.current, valuesRef.current], {
           opacity: 1,
           x: 0,
           y: 0,
@@ -256,17 +261,21 @@ const HeroSection = () => {
   useEffect(() => {
     const resetThemeMotionState = () => {
       if (!imageRef.current) return;
-      gsap.set(imageRef.current, { rotate: 0 });
+      gsap.set(imageRef.current, { rotate: 0, rotationY: 0 });
     };
 
     const onThemeChange = () => {
       if (!imageRef.current) return;
       resetThemeMotionState();
-      gsap.to(imageRef.current, {
-        rotate: '+=360',
-        duration: 1.05,
-        ease: 'power2.inOut',
-      });
+      gsap.fromTo(
+        imageRef.current,
+        { rotationY: 0 },
+        {
+          rotationY: 360,
+          duration: 0.95,
+          ease: 'power2.inOut',
+        }
+      );
     };
 
     window.addEventListener('portfolio-theme-change', onThemeChange as EventListener);
@@ -285,7 +294,6 @@ const HeroSection = () => {
         imageRef.current,
         contentRef.current,
         valuesRef.current,
-        introButtonRef.current,
         butterflyButtonRef.current,
       ].filter(Boolean) as HTMLElement[];
 
@@ -309,7 +317,7 @@ const HeroSection = () => {
     const viewportHeight = window.innerHeight;
     const startX = butterflyRect.left + butterflyRect.width * 0.5;
     const startY = butterflyRect.top + butterflyRect.height * 0.5;
-    const textPoints = buildTextTargets('ZACC\u2764\uFE0F', viewportWidth, viewportHeight);
+    const textPoints = buildTextTargets('ANNA \u2665', viewportWidth, viewportHeight);
     const shuffledPoints = [...textPoints];
     for (let i = shuffledPoints.length - 1; i > 0; i -= 1) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -334,11 +342,13 @@ const HeroSection = () => {
   };
 
   const values = [
-    'Family',
-    'Ethical Behavior',
-    'Social Responsibility',
-    'Management Mindedness',
-    'Pursuit of Excellence',
+    'Problem Solving',
+    'Reliability',
+    'Adaptability',
+    'Teamwork',
+    'Initiative',
+    'Accountability',
+    'Work Ethic',
   ];
 
   return (
@@ -346,11 +356,11 @@ const HeroSection = () => {
       ref={sectionRef}
       className="section-pinned bg-[#0a0a0f] flex items-center justify-center"
       style={{
-        background: 'radial-gradient(ellipse at 30% 50%, rgba(168,85,247,0.08) 0%, transparent 50%), radial-gradient(ellipse at 70% 30%, rgba(126,34,206,0.05) 0%, transparent 40%)',
+        background: 'radial-gradient(ellipse at 30% 50%, rgba(112,130,56,0.08) 0%, transparent 50%), radial-gradient(ellipse at 70% 30%, rgba(85,107,47,0.05) 0%, transparent 40%)',
       }}
     >
-      <div className="absolute -left-20 top-20 w-56 h-56 rounded-full bg-[#9333ea]/20 blur-[90px] animate-pulse-slow pointer-events-none" />
-      <div className="absolute -right-12 bottom-24 w-48 h-48 rounded-full bg-[#7e22ce]/20 blur-[80px] animate-float pointer-events-none" />
+      <div className="absolute -left-20 top-20 w-56 h-56 rounded-full bg-[#5f7a2f]/20 blur-[90px] animate-pulse-slow pointer-events-none" />
+      <div className="absolute -right-12 bottom-24 w-48 h-48 rounded-full bg-[#556b2f]/20 blur-[80px] animate-float pointer-events-none" />
 
       {/* Floating Butterfly (wide click area) */}
       <button
@@ -360,11 +370,11 @@ const HeroSection = () => {
         className="absolute z-30 top-[7%] right-[4%] w-24 h-24 sm:top-[12%] sm:right-[8%] sm:w-28 sm:h-28 flex items-center justify-center cursor-pointer"
         aria-label="Trigger butterfly swarm"
       >
-        <span className="absolute inset-1 rounded-full bg-[#a855f7]/20 blur-md sm:inset-0 sm:bg-transparent sm:blur-none" />
+        <span className="absolute inset-1 rounded-full bg-[#708238]/20 blur-md sm:inset-0 sm:bg-transparent sm:blur-none" />
         <img
           ref={butterflyRef}
-          src="/butterfly-logo.png"
-          alt="Butterfly"
+          src="/pteranodon.png"
+          alt="Pterodactyl"
           className="relative w-20 h-20 sm:w-24 sm:h-24 butterfly-glow animate-float opacity-95 sm:opacity-70 brightness-125 saturate-150"
         />
       </button>
@@ -380,7 +390,7 @@ const HeroSection = () => {
           <img
             key={butterfly.id}
             data-swarm-id={butterfly.id}
-            src="/butterfly-logo.png"
+            src="/pteranodon.png"
             alt=""
             className="absolute w-7 h-7 opacity-0"
           />
@@ -392,68 +402,59 @@ const HeroSection = () => {
           {/* Profile Image */}
           <div
             ref={imageRef}
-            className="hero-image-wrap relative w-64 h-64 lg:w-80 lg:h-80 flex-shrink-0"
+            className="hero-image-wrap hero-coin-flip relative w-64 h-64 lg:w-80 lg:h-80 flex-shrink-0"
           >
-            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[#a855f7] via-[#7e22ce] to-[#4c1d95] p-1">
-              <div className="w-full h-full rounded-full overflow-hidden border-4 border-[#0a0a0f]">
+            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[#708238] via-[#556b2f] to-[#3f4f22] p-1">
+              <div className="hero-photo-circle relative w-full h-full rounded-full overflow-hidden border-4 border-[#0a0a0f]">
+                <div className="hero-photo-light-bg absolute inset-0" />
                 <img
-                  src="/roanpic.jpg"
-                  alt="Roan"
-                  className="w-full h-full object-cover"
+                  src="/zacc-transparent.png"
+                  alt="Zacc Bandahala"
+                  className="relative z-10 w-full h-full object-cover"
                 />
               </div>
             </div>
             {/* Glow effect */}
-            <div className="absolute -inset-4 rounded-full bg-[#a855f7]/20 blur-2xl -z-10" />
+            <div className="absolute -inset-4 rounded-full bg-[#708238]/20 blur-2xl -z-10" />
           </div>
 
           {/* Content */}
-          <div ref={contentRef} className="hero-main-content flex-1 text-center lg:text-left">
-            <span className="font-mono text-xs tracking-[0.2em] uppercase text-[#a855f7] mb-4 block">
-              You may call me
+          <div ref={contentRef} className="hero-main-content flex-1 text-left">
+            <span className="font-mono text-xs tracking-[0.2em] uppercase text-[#708238] mb-4 block">
+              Hi! I am
             </span>
             
-            <h1 ref={roanRef} className="text-5xl lg:text-7xl font-bold text-gradient mb-6 no-text-outline">
-              Roan
+            <h1 ref={nameRef} className="text-5xl lg:text-7xl font-bold text-gradient mb-6 no-text-outline">
+              Zacc
             </h1>
+            <p className="text-[#a3b97a] text-xs mb-4">
+              ZCSALWEEMNHARR E. BANDAHALA
+            </p>
 
-            <a
-              ref={introButtonRef}
-              href="https://www.loom.com/share/9e21b74ea41d4bf0ae65ba76083cdab1"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="uiverse-fun-btn mb-6 inline-flex items-center gap-2"
-            >
-              <span className="uiverse-fun-btn__label">Click Here To Watch My Intro Video</span>
-              <Play size={18} className="uiverse-fun-btn__icon" />
-            </a>
-
-            <div className="space-y-4 text-[#c4b5fd]/80 text-base lg:text-lg leading-relaxed max-w-2xl">
-              <p>
-                I am a multifaceted professional with a robust background in <span className="text-[#a855f7] font-medium">administration</span>, <span className="text-[#a855f7] font-medium">executive assistance</span>, and <span className="text-[#a855f7] font-medium">customer service</span>.
-              </p>
-              {!showMoreIntro ? (
+            <div className="space-y-4 text-[#b7c98a]/80 text-base lg:text-lg leading-relaxed max-w-2xl">
+              {!showInfo ? (
                 <button
                   type="button"
-                  onClick={() => setShowMoreIntro(true)}
-                  className="uiverse-fun-btn inline-flex items-center"
+                  onClick={() => setShowInfo(true)}
+                  className="uiverse-fun-btn inline-flex items-center justify-center"
+                  aria-label="View info"
                 >
-                  <span className="uiverse-fun-btn__label">View More</span>
+                  <span className="uiverse-fun-btn__label">VIEW INFO</span>
                 </button>
-              ) : (
+              ) : null}
+              {showInfo ? (
                 <p>
-                  Over the years, I have mastered the art of creating systems that enhance productivity and efficiency, consistently exploring the latest tools for organization. Balancing flexibility with discipline, my strong organizational and time-management skills enable me to thrive in fast-paced environments.
+                  <span className="text-[#708238]">Versatile and results-driven professional with hands-on experience in web development, QA testing, e-commerce, and data analytics. Skilled at coordinating tasks, managing projects, troubleshooting issues, and ensuring smooth workflows across technical and non-technical roles. Effective communication, organization, teamwork, and quality focus drive reliable results in dynamic environments.</span>
                 </p>
-              )}
+              ) : null}
             </div>
 
-            {/* Advocacy */}
             <div className="mt-6 p-4 rounded-xl card-glass">
-              <p className="text-sm text-[#a78bfa]">
-                A staunch advocate for the <span className="text-[#a855f7] font-semibold">environment</span> and <span className="text-[#a855f7] font-semibold">children's rights</span>
+              <p className="text-sm text-[#a3b97a]">
+                <span className="text-[#708238] font-semibold">Bachelor of Science in Computer Science</span>
               </p>
-              <p className="text-xs text-[#a78bfa]/70 mt-2">
-                Previously involved with UPD Pahinungod, YACAP Philippines, and AGHAM Youth
+              <p className="text-xs text-[#a3b97a]/70 mt-2">
+                Western Mindanao State University, Zamboanga City, Philippines
               </p>
             </div>
           </div>
@@ -462,34 +463,39 @@ const HeroSection = () => {
         {/* Core Values */}
         <div
           ref={valuesRef}
-          className="hero-values mt-12 lg:mt-16 flex flex-wrap justify-center gap-4 lg:gap-6"
+          className={`hero-values flex flex-wrap justify-center gap-4 lg:gap-6 ${
+            showInfo ? 'mt-20 lg:mt-24' : 'mt-16 lg:mt-20'
+          }`}
         >
-          <span className="w-full text-center font-mono text-sm tracking-[0.18em] uppercase text-[#a855f7] font-semibold">
+          <span className="w-full text-center font-mono text-sm tracking-[0.18em] uppercase text-[#708238] font-semibold">
             Values
           </span>
           {values.map((value) => (
             <div
               key={value}
-              className="flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20"
+              className="flex items-center gap-2 px-4 py-2 rounded-full bg-[#708238]/10 border border-[#708238]/20"
             >
-              <span className="text-sm text-[#a78bfa]/70">{value}</span>
+              <span className="text-sm text-[#a3b97a]/70">{value}</span>
             </div>
           ))}
+          <div className="w-full flex justify-center mt-2">
+            <a href="#work" aria-label="Scroll down" className="slow-down-arrow text-[#7aa24a] text-4xl leading-none">
+              ↓
+            </a>
+          </div>
         </div>
 
-        {/* Scroll indicator */}
-        <div className="hero-scroll-indicator absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
-          <span className="font-mono text-xs tracking-[0.14em] uppercase text-[#a78bfa]/50">
-            Scroll to explore
-          </span>
-          <ChevronDown size={20} className="text-[#a855f7] animate-bounce" />
-        </div>
       </div>
     </section>
   );
 };
 
 export default HeroSection;
+
+
+
+
+
 
 
 

@@ -1,4 +1,4 @@
-import { useRef, useLayoutEffect } from 'react';
+﻿import { useRef, useLayoutEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Search, Layout, Code, Rocket } from 'lucide-react';
@@ -150,7 +150,7 @@ const ProcessSection = () => {
           ref={headlineRef}
           className="text-[clamp(28px,3vw,42px)] font-semibold text-[#F4F6FF] leading-tight mb-10"
         >
-          Discovery, build, polish—repeat.
+          Discovery, build, polishâ€”repeat.
         </h2>
 
         {/* Steps */}
@@ -184,3 +184,5 @@ const ProcessSection = () => {
 };
 
 export default ProcessSection;
+
+

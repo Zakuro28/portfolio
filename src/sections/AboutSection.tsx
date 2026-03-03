@@ -1,4 +1,4 @@
-import { useRef, useLayoutEffect } from 'react';
+﻿import { useRef, useLayoutEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowRight } from 'lucide-react';
@@ -132,7 +132,7 @@ const AboutSection = () => {
             complex ideas into simple, delightful UI.
           </p>
           <p className="text-[#A7B0C8] text-[clamp(14px,1.1vw,17px)] leading-relaxed">
-            My stack is modern—React, TypeScript, WebGL—but my focus is
+            My stack is modernâ€”React, TypeScript, WebGLâ€”but my focus is
             timeless: clarity, performance, and craft.
           </p>
         </div>
@@ -156,3 +156,5 @@ const AboutSection = () => {
 };
 
 export default AboutSection;
+
+

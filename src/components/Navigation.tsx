@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+﻿import { useEffect, useState } from 'react';
 import { Menu, X, Sun, Moon } from 'lucide-react';
 
 const Navigation = () => {
@@ -47,11 +47,11 @@ const Navigation = () => {
 
   const navItems = [
     { label: 'Home', id: 'home' },
-    { label: 'Work', id: 'work' },
+    { label: 'Experience', id: 'work' },
     { label: 'Expertise', id: 'skills' },
-    { label: 'Involvement', id: 'activities' },
-    { label: 'Recognition', id: 'achievements' },
-    { label: 'Service', id: 'volunteer' },
+    { label: 'Tools', id: 'activities' },
+    { label: 'Education', id: 'achievements' },
+    { label: 'Summary', id: 'volunteer' },
     { label: 'Contact', id: 'contact' },
   ];
 
@@ -61,8 +61,8 @@ const Navigation = () => {
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           isScrolled
             ? isLightMode
-              ? 'bg-[#ede8d0]/90 backdrop-blur-xl border-b border-purple-500/15'
-              : 'bg-[#0a0a0f]/90 backdrop-blur-xl border-b border-purple-500/10'
+              ? 'bg-[#ede8d0]/90 backdrop-blur-xl border-b border-[#708238]/15'
+              : 'bg-[#0a0a0f]/90 backdrop-blur-xl border-b border-[#708238]/10'
             : 'bg-transparent'
         }`}
       >
@@ -73,8 +73,8 @@ const Navigation = () => {
             className="flex items-center gap-3 group"
           >
             <img 
-              src="/butterfly-logo.png" 
-              alt="Roan Logo" 
+              src="/pteranodon.png" 
+              alt="Pterodactyl Logo" 
               className="w-8 h-8 butterfly-glow transition-transform group-hover:scale-110"
             />
           </button>
@@ -85,7 +85,7 @@ const Navigation = () => {
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className="uiverse-nav-btn font-mono text-sm tracking-[0.14em] uppercase text-[#a78bfa]/70 hover:text-[#a855f7]"
+                className="uiverse-nav-btn font-mono text-sm tracking-[0.14em] uppercase text-[#a3b97a]/70 hover:text-[#708238]"
                 style={{ ['--nav-i' as string]: index }}
               >
                 {item.label}
@@ -110,7 +110,7 @@ const Navigation = () => {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className={`lg:hidden p-2 ${isLightMode ? 'text-slate-800' : 'text-[#f3e8ff]'}`}
+              className={`lg:hidden p-2 ${isLightMode ? 'text-slate-800' : 'text-[#f2f6e8]'}`}
             >
               {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
@@ -131,8 +131,8 @@ const Navigation = () => {
             <button
               key={item.id}
               onClick={() => scrollToSection(item.id)}
-              className={`uiverse-nav-btn uiverse-nav-btn--mobile font-mono text-xl tracking-[0.14em] uppercase hover:text-[#a855f7] ${
-                isLightMode ? 'text-slate-800' : 'text-[#f3e8ff]'
+              className={`uiverse-nav-btn uiverse-nav-btn--mobile font-mono text-xl tracking-[0.14em] uppercase hover:text-[#708238] ${
+                isLightMode ? 'text-slate-800' : 'text-[#f2f6e8]'
               }`}
               style={{ ['--nav-i' as string]: index }}
             >
@@ -146,3 +146,7 @@ const Navigation = () => {
 };
 
 export default Navigation;
+
+
+
+
