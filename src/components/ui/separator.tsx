@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import * as React from "react"
 import * as SeparatorPrimitive from "@radix-ui/react-separator"
@@ -26,5 +26,3 @@ function Separator({
 }
 
 export { Separator }
-
-

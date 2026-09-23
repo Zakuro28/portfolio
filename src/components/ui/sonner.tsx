@@ -1,4 +1,4 @@
-﻿import {
+import {
   CircleCheckIcon,
   InfoIcon,
   Loader2Icon,
@@ -36,5 +36,3 @@ const Toaster = ({ ...props }: ToasterProps) => {
 }
 
 export { Toaster }
-
-

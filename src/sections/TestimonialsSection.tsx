@@ -1,4 +1,4 @@
-﻿import { useRef, useLayoutEffect } from 'react';
+import { useRef, useLayoutEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowRight, Quote } from 'lucide-react';
@@ -151,5 +151,3 @@ const TestimonialsSection = () => {
 };
 
 export default TestimonialsSection;
-
-
