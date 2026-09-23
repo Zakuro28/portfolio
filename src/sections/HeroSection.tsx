@@ -424,11 +424,14 @@ const HeroSection = () => {
               Hi! I am
             </span>
             
-            <h1 ref={nameRef} className="text-5xl lg:text-7xl font-bold text-gradient mb-6 no-text-outline">
+            <h1 ref={nameRef} className="text-5xl lg:text-7xl font-bold text-gradient mb-4 no-text-outline">
               Zacc
             </h1>
-            <p className="text-[#a3b97a] text-xs mb-4">
+            <p className="text-[#a3b97a] text-xs mb-1">
               ZCSALWEEMNHARR E. BANDAHALA
+            </p>
+            <p className="font-mono text-xs tracking-[0.2em] uppercase text-[#708238] mb-4">
+              Multi-Skilled Professional
             </p>
 
             <div className="space-y-4 text-[#b7c98a]/80 text-base lg:text-lg leading-relaxed max-w-2xl">
@@ -444,7 +447,7 @@ const HeroSection = () => {
               ) : null}
               {showInfo ? (
                 <p>
-                  <span className="text-[#708238]">Versatile and results-driven professional with hands-on experience in web development, QA testing, e-commerce, and data analytics. Skilled at coordinating tasks, managing projects, troubleshooting issues, and ensuring smooth workflows across technical and non-technical roles. Effective communication, organization, teamwork, and quality focus drive reliable results in dynamic environments.</span>
+                  <span className="text-[#708238]">Versatile and results-driven professional with hands-on experience in web development, QA testing, e-commerce, analytics, general operations, and customer service. Skilled at problem-solving, coordinating tasks, managing projects, and ensuring smooth workflows across technical and non-technical roles. Adaptable and quick to learn, capable of handling diverse responsibilities from team supervision and customer support to troubleshooting and process improvement. Committed to contributing effectively in dynamic environments and continuously learning to expand skills across multiple fields.</span>
                 </p>
               ) : null}
             </div>

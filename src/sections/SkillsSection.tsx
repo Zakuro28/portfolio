@@ -3,7 +3,8 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import {
   Database, Code2, GitBranch, ShieldCheck,
-  MessageSquare, Users, Lightbulb, Clock, Target
+  MessageSquare, Users, Lightbulb, Clock, Target,
+  ClipboardCheck, Headset
 } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -24,6 +25,8 @@ const hardSkills = [
   { icon: Database, name: 'Database Design & Data Modeling', level: 89 },
   { icon: GitBranch, name: 'Version Control (Git/GitHub)', level: 88 },
   { icon: ShieldCheck, name: 'Testing, Debugging & Quality', level: 88 },
+  { icon: ClipboardCheck, name: 'Medical Claims Processing', level: 88 },
+  { icon: Headset, name: 'Customer Support', level: 90 },
 ];
 
 const SkillsSection = () => {

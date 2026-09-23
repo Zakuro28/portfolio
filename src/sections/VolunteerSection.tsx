@@ -10,7 +10,7 @@ const summaryHighlights = [
     icon: FileText,
     title: 'Professional Profile',
     description:
-      'Versatile and results-driven with hands-on experience in web development, QA testing, e-commerce, analytics, and general operations.',
+      'Versatile and results-driven with hands-on experience in web development, QA testing, e-commerce, analytics, general operations, and customer service.',
   },
   {
     icon: Users,

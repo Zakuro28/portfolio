@@ -1,7 +1,7 @@
 ﻿import { useRef, useLayoutEffect, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Send, CheckCircle, User, Mail, Facebook, Linkedin } from 'lucide-react';
+import { Send, CheckCircle, User, Mail, Phone, Facebook, Linkedin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -305,6 +305,15 @@ const ContactSection = () => {
                   className="hover:text-[#b9cc8f] transition-colors"
                   >
                     zakurofr@gmail.com
+                  </a>
+                </p>
+              <p className="flex items-center justify-center gap-3">
+                <Phone size={24} />
+                <a
+                  href="tel:+639203506666"
+                  className="hover:text-[#b9cc8f] transition-colors"
+                  >
+                    +63 920 350 6666
                   </a>
                 </p>
               <p className="flex items-center justify-center gap-3">

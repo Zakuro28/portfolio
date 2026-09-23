@@ -1,34 +1,35 @@
 ﻿import { useRef, useLayoutEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Briefcase, Code2 } from 'lucide-react';
+import { Headset, ClipboardCheck } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const experiences = [
   {
     id: 1,
-    title: 'Web Developer - E-Commerce & Data Analytics Project',
-    subtitle: 'WMSU TBIU',
-    icon: Code2,
+    title: 'Chat Support Representative',
+    subtitle: 'SupportZebra, Recto Ave, Cagayan de Oro City',
+    icon: Headset,
     points: [
-      'Developed and maintained an e-commerce and analytics website using HTML, CSS, JavaScript, PHP, and MySQL.',
-      'Built product listings, shopping cart, order management, and analytics dashboards.',
-      'Designed and optimized the database structure for fast and accurate retrieval.',
-      'Implemented input validation and security measures to protect sensitive data.',
-      'Resolved technical issues, improved performance, and supported checkout and reporting tests.',
+      'Provided professional and timely customer support through live chat, addressing inquiries, concerns, and service-related issues while maintaining a positive customer experience.',
+      'Assisted customers with account-related concerns, product or service information, order inquiries, and basic troubleshooting based on established procedures.',
+      'Managed multiple chat conversations efficiently while maintaining accuracy, professionalism, and appropriate response times.',
+      'Documented customer interactions, concerns, and resolutions accurately in internal systems for proper tracking and follow-up.',
+      'Identified customer issues, provided appropriate solutions, and escalated complex concerns to the relevant team when necessary.',
+      'Followed company policies and quality standards while collaborating with team members and supervisors to ensure consistent and effective customer service.',
     ],
   },
   {
     id: 2,
-    title: 'QA Engineer / On-the-Job Trainee',
-    subtitle: 'BSCS Industry Visit, Manila, Luzon',
-    icon: Briefcase,
+    title: 'Medical Claims Analyst',
+    subtitle: 'Med-Metrix, TechnoPoint, Pasig City, Luzon',
+    icon: ClipboardCheck,
     points: [
-      'Led development and debugging of software modules using Java and C++.',
-      'Designed and modified scripts and modules to automate repetitive tasks.',
-      'Collaborated with senior IT engineers to gather technical requirements and propose system improvements.',
-      'Tested software components for correctness, performance, and security compliance.',
+      'Reviewed and processed medical claims by validating patient, provider, billing, and insurance information to ensure accuracy and compliance with established guidelines.',
+      'Analyzed medical documentation, claim details, and supporting records to identify discrepancies, missing information, and potential processing errors.',
+      'Utilized healthcare and claims processing systems to accurately update, maintain, and document claim information while meeting productivity and quality standards.',
+      'Collaborated with internal teams and followed established procedures to resolve claim-related issues, clarify discrepancies, and ensure timely and accurate claim processing.',
     ],
   },
 ];
@@ -120,7 +121,7 @@ const WorkSection = () => {
             Work Highlights
           </h2>
           <p className="text-[#a3b97a]/70 text-[clamp(17px,1.35vw,21px)] max-w-2xl mx-auto leading-relaxed">
-            Core responsibilities and contributions from QA and web development roles.
+            Core responsibilities and contributions from customer support and medical claims processing roles.
           </p>
         </div>
 
