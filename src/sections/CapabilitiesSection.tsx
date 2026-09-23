@@ -1,4 +1,4 @@
-import { useRef, useLayoutEffect } from 'react';
+﻿import { useRef, useLayoutEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Layers, Sparkles, Box, Zap, Code2, FileType, Wand2 } from 'lucide-react';
@@ -174,3 +174,5 @@ const CapabilitiesSection = () => {
 };
 
 export default CapabilitiesSection;
+
+

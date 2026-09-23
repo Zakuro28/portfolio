@@ -1,0 +1,12 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Pterodactyl logo">
+  <defs>
+    <linearGradient id="wing" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#b9cc8f"/>
+      <stop offset="100%" stop-color="#556b2f"/>
+    </linearGradient>
+  </defs>
+  <path fill="url(#wing)" d="M7 66l47-18 15-20 20 2 27 19-33 3-16 16 13 9 15-3-7 12-20 7-11-10-17-2-20 13z"/>
+  <circle cx="81" cy="40" r="2.5" fill="#e6f0d0"/>
+</svg>
+
+

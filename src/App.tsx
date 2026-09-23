@@ -1,10 +1,9 @@
-import { useRef } from 'react';
+﻿import { useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Navigation from './components/Navigation';
 import HeroSection from './sections/HeroSection';
 import WorkSection from './sections/WorkSection';
-import CaseStudySection from './sections/CaseStudySection';
 import SkillsSection from './sections/SkillsSection';
 import ExtracurricularSection from './sections/ExtracurricularSection';
 import AchievementsSection from './sections/AchievementsSection';
@@ -28,7 +27,6 @@ function App() {
       <main className="relative">
         <HeroSection />
         <WorkSection />
-        <CaseStudySection />
         <SkillsSection />
         <ExtracurricularSection />
         <AchievementsSection />
@@ -40,3 +38,5 @@ function App() {
 }
 
 export default App;
+
+
