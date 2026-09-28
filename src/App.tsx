@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Navigation from './components/Navigation';
 import HeroSection from './sections/HeroSection';
+import ProjectsSection from './sections/ProjectsSection';
 import WorkSection from './sections/WorkSection';
 import SkillsSection from './sections/SkillsSection';
 import ExtracurricularSection from './sections/ExtracurricularSection';
@@ -26,6 +27,7 @@ function App() {
       {/* Sections */}
       <main className="relative">
         <HeroSection />
+        <ProjectsSection />
         <WorkSection />
         <SkillsSection />
         <ExtracurricularSection />
