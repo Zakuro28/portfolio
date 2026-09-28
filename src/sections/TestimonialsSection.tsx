@@ -120,7 +120,7 @@ const TestimonialsSection = () => {
         {/* Quote */}
         <blockquote
           ref={quoteRef}
-          className="text-[clamp(20px,2vw,28px)] font-medium text-[#F4F6FF] leading-snug mb-10"
+          className="text-[clamp(17px,1.5vw,22px)] font-medium text-[#F4F6FF] leading-snug mb-10"
         >
           "Alex turned our product vision into a UI that feels effortless. The
           performance gains were immediate."

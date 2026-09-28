@@ -2,7 +2,6 @@
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Send, CheckCircle, User, Mail, Phone, Facebook, Linkedin } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 
@@ -163,10 +162,10 @@ const ContactSection = () => {
           <span className="font-mono text-xs tracking-[0.2em] uppercase text-[#708238] block mb-2">
             Get in Touch
           </span>
-          <h2 className="text-[clamp(34px,3.6vw,52px)] font-bold text-gradient mb-4">
+          <h2 className="text-[clamp(26px,2.5vw,36px)] font-bold text-gradient mb-4">
             Let's Connect
           </h2>
-          <p className="text-[#a3b97a]/70 text-[clamp(14px,1.1vw,17px)] leading-relaxed mb-8">
+          <p className="text-[#a3b97a]/70 text-[clamp(14px,1vw,15px)] leading-relaxed mb-8">
             I'm always open to discussing new opportunities, collaborations, or simply having a meaningful conversation about our shared passions.
           </p>
 
@@ -184,8 +183,10 @@ const ContactSection = () => {
               href="https://www.linkedin.com/in/zcsalweemnharr-bandahala-445167309/"
               target="_blank"
               rel="noopener noreferrer"
-              className="linkedin-cta-btn mt-4 flex w-full items-center justify-center py-3 px-4 bg-gradient-to-r from-[#7a9440] to-[#708238] hover:from-[#6b862f] hover:to-[#5f7a2f] text-white text-center rounded-xl font-medium transition-colors"
+              className="stone-btn stone-btn--moss stone-btn--wide mt-4"
+              style={{ ['--stone-fs' as string]: '0.85rem' }}
             >
+              <Linkedin size={16} aria-hidden />
               View LinkedIn Profile
             </a>
           </div>
@@ -255,14 +256,10 @@ const ContactSection = () => {
                   />
                 </div>
 
-                <Button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="no-text-outline uiverse-fun-btn w-full justify-center disabled:opacity-50"
-                >
+                <button type="submit" disabled={isSubmitting} className="stone-btn stone-btn--moss stone-btn--wide" style={{ ['--stone-fs' as string]: '0.85rem' }}>
                   {isSubmitting ? 'Sending...' : 'Send Message'}
-                  <Send size={16} className="ml-2" />
-                </Button>
+                  <Send size={16} aria-hidden />
+                </button>
               </form>
             )}
           </div>
@@ -282,7 +279,7 @@ const ContactSection = () => {
             />
             <div className="flex flex-col items-center text-center gap-2">
               <div>
-                <h3 className="text-[clamp(34px,3.6vw,52px)] font-bold text-gradient leading-[1.1]">
+                <h3 className="text-[clamp(26px,2.5vw,36px)] font-bold text-gradient leading-[1.1]">
                   Code with logic.
                   <br />
                   Execute with purpose.
@@ -291,7 +288,7 @@ const ContactSection = () => {
                 </h3>
               </div>
 
-            <div className="portfolio-text-outline space-y-1 text-[clamp(22px,1.6vw,34px)] text-[#a3b97a]">
+            <div className="portfolio-text-outline space-y-1 text-[clamp(18px,1.4vw,24px)] text-[#a3b97a]">
               <p className="flex items-center justify-center gap-3">
                 <User size={24} />
                 <span>Zcsalweemnharr "Zacc" E. Bandahala</span>

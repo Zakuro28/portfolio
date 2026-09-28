@@ -120,18 +120,18 @@ const AboutSection = () => {
         {/* Headline */}
         <h2
           ref={headlineRef}
-          className="text-[clamp(28px,3vw,42px)] font-semibold text-[#F4F6FF] leading-tight mb-8"
+          className="text-[clamp(22px,2.2vw,30px)] font-semibold text-[#F4F6FF] leading-tight mb-8"
         >
           I build fast, accessible interfaces with obsessive attention to detail.
         </h2>
 
         {/* Body */}
         <div ref={bodyRef} className="space-y-4 mb-8">
-          <p className="text-[#A7B0C8] text-[clamp(14px,1.1vw,17px)] leading-relaxed">
+          <p className="text-[#A7B0C8] text-[clamp(14px,1vw,15px)] leading-relaxed">
             Over the last 8 years, I've partnered with product teams to turn
             complex ideas into simple, delightful UI.
           </p>
-          <p className="text-[#A7B0C8] text-[clamp(14px,1.1vw,17px)] leading-relaxed">
+          <p className="text-[#A7B0C8] text-[clamp(14px,1vw,15px)] leading-relaxed">
             My stack is modernâ€”React, TypeScript, WebGLâ€”but my focus is
             timeless: clarity, performance, and craft.
           </p>

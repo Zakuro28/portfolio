@@ -1,4 +1,4 @@
-﻿import { useEffect, useState } from 'react';
+﻿import { useEffect, useRef, useState } from 'react';
 import { Menu, X, Sun, Moon } from 'lucide-react';
 
 const Navigation = () => {
@@ -14,9 +14,19 @@ const Navigation = () => {
     document.documentElement.classList.toggle('light', light);
   }, []);
 
+  // Hide the bar while scrolling down, bring it back as soon as you scroll up
+  const [isHidden, setIsHidden] = useState(false);
+  const lastY = useRef(0);
+
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 100);
+      const y = window.scrollY;
+      setIsScrolled(y > 100);
+      const delta = y - lastY.current;
+      if (y < 120) setIsHidden(false);
+      else if (delta > 6) setIsHidden(true);
+      else if (delta < -6) setIsHidden(false);
+      if (Math.abs(delta) > 6) lastY.current = y;
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -59,7 +69,10 @@ const Navigation = () => {
   return (
     <>
       <nav
+        onFocusCapture={() => setIsHidden(false)}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+          isHidden && !isMobileMenuOpen ? '-translate-y-full' : 'translate-y-0'
+        } ${
           isScrolled
             ? isLightMode
               ? 'bg-[#ede8d0]/90 backdrop-blur-xl border-b border-[#708238]/15'
@@ -86,8 +99,8 @@ const Navigation = () => {
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className="uiverse-nav-btn font-mono text-sm tracking-[0.14em] uppercase text-[#a3b97a]/70 hover:text-[#708238]"
-                style={{ ['--nav-i' as string]: index }}
+                className="stone-btn stone-btn--pebble"
+                style={{ ['--nav-i' as string]: index, ['--stone-fs' as string]: '0.72rem' }}
               >
                 {item.label}
               </button>
@@ -132,10 +145,8 @@ const Navigation = () => {
             <button
               key={item.id}
               onClick={() => scrollToSection(item.id)}
-              className={`uiverse-nav-btn uiverse-nav-btn--mobile font-mono text-xl tracking-[0.14em] uppercase hover:text-[#708238] ${
-                isLightMode ? 'text-slate-800' : 'text-[#f2f6e8]'
-              }`}
-              style={{ ['--nav-i' as string]: index }}
+              className="stone-btn stone-btn--pebble min-w-[220px] py-3"
+              style={{ ['--nav-i' as string]: index, ['--stone-fs' as string]: '0.95rem' }}
             >
               {item.label}
             </button>

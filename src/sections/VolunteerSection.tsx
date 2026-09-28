@@ -1,28 +1,28 @@
 ﻿import { useRef, useLayoutEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { FileText, Users, Gauge } from 'lucide-react';
+import { BadgeCheck, Briefcase, Code2 } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const summaryHighlights = [
   {
-    icon: FileText,
-    title: 'Professional Profile',
+    icon: Code2,
+    title: 'Builds and tests web apps',
     description:
-      'Versatile and results-driven with hands-on experience in web development, QA testing, e-commerce, analytics, general operations, and customer service.',
+      'Designs and ships working web apps with React, TypeScript, Laravel and SQL, from first layout to live deployment, and tests them for bugs, mobile layouts and accessibility before launch.',
   },
   {
-    icon: Users,
-    title: 'Collaboration & Communication',
+    icon: Briefcase,
+    title: 'Proven in support and claims',
     description:
-      'Strong at coordinating tasks, managing projects, supporting teams, and translating requirements into practical technical execution.',
+      'Handled live customer chats at SupportZebra and processed medical claims at Med-Metrix: two roles where accuracy, clear communication and quality targets are part of every task.',
   },
   {
-    icon: Gauge,
-    title: 'Quality & Efficiency',
+    icon: BadgeCheck,
+    title: 'Careful, clear and reliable',
     description:
-      'Focused on reliable delivery, process improvement, and continuous learning across both technical and non-technical responsibilities.',
+      'Follows procedures, documents the work, asks the right questions early, and keeps improving the process, whether the task is technical or not.',
   },
 ];
 
@@ -110,15 +110,17 @@ const VolunteerSection = () => {
         <span className="font-mono text-xs tracking-[0.2em] uppercase text-[#708238] block mb-2">
           Summary
         </span>
-        <h2 className="text-[clamp(34px,3.6vw,52px)] font-bold text-gradient mb-4">
+        <h2 className="text-[clamp(26px,2.5vw,36px)] font-bold text-gradient mb-4">
           Professional Summary
         </h2>
-        <p className="text-[#a3b97a]/70 text-[clamp(14px,1.1vw,17px)] max-w-2xl mx-auto leading-relaxed">
-          Snapshot of strengths, approach, and working style.
+        <p className="text-[#a3b97a] text-[clamp(15px,1.1vw,17px)] max-w-3xl mx-auto leading-relaxed">
+          Computer Science graduate with honors and a Best Research Paper award, who builds and tests web applications and
+          brings real-world experience from customer support and healthcare claims. Detail-oriented, quick to learn, and
+          focused on work that is accurate, well documented and delivered on time.
         </p>
       </div>
 
-      <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+      <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
         {summaryHighlights.map((item, index) => (
           <div
             key={item.title}
@@ -131,7 +133,7 @@ const VolunteerSection = () => {
               <item.icon size={22} />
             </div>
             <h3 className="text-[#f2f6e8] font-semibold mb-2">{item.title}</h3>
-            <p className="text-[#a3b97a]/80 text-sm leading-relaxed">{item.description}</p>
+            <p className="text-left text-[#a3b97a]/80 text-sm leading-relaxed">{item.description}</p>
           </div>
         ))}
       </div>

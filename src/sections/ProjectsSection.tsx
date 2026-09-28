@@ -7,6 +7,16 @@ gsap.registerPlugin(ScrollTrigger);
 
 const projects = [
   {
+    name: 'Kit',
+    kind: 'Task board',
+    url: 'https://zacc-kit.vercel.app',
+    repo: 'https://github.com/Zakuro28/task-board',
+    image: '/projects/kit.jpg',
+    description:
+      'A drag-and-drop board with To do, Doing and Done columns. Tasks have labels, due dates, priority, checklists and notes, with search and filters. Built from small reusable components and saved in the browser.',
+    tech: ['React', 'TypeScript', 'Tailwind CSS', 'dnd-kit'],
+  },
+  {
     name: 'Pitaka',
     kind: 'Expense tracker',
     url: 'https://pitaka-nine.vercel.app',
@@ -119,8 +129,8 @@ const ProjectsSection = () => {
           <span className="font-mono text-base tracking-[0.2em] uppercase text-[#708238] block mb-3">
             Live on the web
           </span>
-          <h2 className="text-[clamp(44px,4.4vw,66px)] font-bold text-gradient mb-3">Projects</h2>
-          <p className="text-[#a3b97a]/70 text-[clamp(17px,1.35vw,21px)] max-w-2xl mx-auto leading-relaxed">
+          <h2 className="text-[clamp(30px,3vw,42px)] font-bold text-gradient mb-3">Projects</h2>
+          <p className="text-[#a3b97a]/70 text-[clamp(15px,1.1vw,17px)] max-w-2xl mx-auto leading-relaxed">
             Websites and apps I designed and built. Click one to open the live site.
           </p>
         </div>
@@ -132,7 +142,7 @@ const ProjectsSection = () => {
               ref={(el) => {
                 cardsRef.current[index] = el;
               }}
-              className="group relative rounded-2xl shadow-2xl transition-all duration-500 hover:-translate-y-1 hover:shadow-[#708238]/20 card-glass border border-[#708238]/20 overflow-hidden"
+              className="group relative flex flex-col rounded-2xl lg:last:odd:col-span-2 lg:last:odd:w-[calc(50%-1rem)] lg:last:odd:justify-self-center shadow-2xl transition-all duration-500 hover:-translate-y-1 hover:shadow-[#708238]/20 card-glass border border-[#708238]/20 overflow-hidden"
             >
               {/* The whole card opens the live site */}
               <a
@@ -165,7 +175,7 @@ const ProjectsSection = () => {
                 </div>
               </div>
 
-              <div className="p-6">
+              <div className="flex flex-1 flex-col p-6">
                 <div className="flex items-start justify-between gap-4 mb-3">
                   <div>
                     <h3 className="text-[#b9cc8f] text-2xl font-bold mb-1">{project.name}</h3>
@@ -187,12 +197,12 @@ const ProjectsSection = () => {
                   ))}
                 </ul>
 
-                {/* Sits above the card link so the code can be opened separately */}
+                {/* Pinned to the bottom-left corner; sits above the card link so the code opens separately */}
                 <a
                   href={project.repo}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="relative z-20 mt-5 inline-flex items-center gap-2 text-sm text-[#a3b97a] underline-offset-4 hover:underline"
+                  className="relative z-20 mt-auto self-start pt-5 inline-flex items-center gap-2 text-sm text-[#a3b97a] underline-offset-4 hover:underline"
                 >
                   <Github size={16} /> View the code
                 </a>

@@ -117,10 +117,10 @@ const AchievementsSection = () => {
         <span className="font-mono text-xs tracking-[0.2em] uppercase text-[#708238] block mb-2">
           Recognition
         </span>
-        <h2 className="text-[clamp(34px,3.6vw,52px)] font-bold text-gradient mb-4">
+        <h2 className="text-[clamp(26px,2.5vw,36px)] font-bold text-gradient mb-4">
           Education & Recognition
         </h2>
-        <p className="text-[#a3b97a]/70 text-[clamp(14px,1.1vw,17px)] max-w-xl mx-auto leading-relaxed">
+        <p className="text-[#a3b97a]/70 text-[clamp(14px,1vw,15px)] max-w-xl mx-auto leading-relaxed">
           Academic background and key educational recognitions.
         </p>
       </div>

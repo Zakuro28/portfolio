@@ -30,6 +30,8 @@ const experiences = [
       'Analyzed medical documentation, claim details, and supporting records to identify discrepancies, missing information, and potential processing errors.',
       'Utilized healthcare and claims processing systems to accurately update, maintain, and document claim information while meeting productivity and quality standards.',
       'Collaborated with internal teams and followed established procedures to resolve claim-related issues, clarify discrepancies, and ensure timely and accurate claim processing.',
+      'Identified denied, rejected, or incomplete claims, traced the cause, and followed up on corrections to support timely reimbursement.',
+      'Handled sensitive patient, billing, and insurance information confidentially, in line with healthcare privacy and data-protection requirements.',
     ],
   },
 ];
@@ -117,10 +119,10 @@ const WorkSection = () => {
           <span className="font-mono text-base tracking-[0.2em] uppercase text-[#708238] block mb-3">
             Professional Experience
           </span>
-          <h2 className="text-[clamp(44px,4.4vw,66px)] font-bold text-gradient mb-3">
+          <h2 className="text-[clamp(30px,3vw,42px)] font-bold text-gradient mb-3">
             Work Highlights
           </h2>
-          <p className="text-[#a3b97a]/70 text-[clamp(17px,1.35vw,21px)] max-w-2xl mx-auto leading-relaxed">
+          <p className="text-[#a3b97a]/70 text-[clamp(15px,1.1vw,17px)] max-w-2xl mx-auto leading-relaxed">
             Core responsibilities and contributions from customer support and medical claims processing roles.
           </p>
         </div>

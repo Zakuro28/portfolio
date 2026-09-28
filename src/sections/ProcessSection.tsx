@@ -148,7 +148,7 @@ const ProcessSection = () => {
         {/* Headline */}
         <h2
           ref={headlineRef}
-          className="text-[clamp(28px,3vw,42px)] font-semibold text-[#F4F6FF] leading-tight mb-10"
+          className="text-[clamp(22px,2.2vw,30px)] font-semibold text-[#F4F6FF] leading-tight mb-10"
         >
           Discovery, build, polishâ€”repeat.
         </h2>

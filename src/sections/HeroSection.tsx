@@ -1,6 +1,8 @@
 ﻿import { useEffect, useRef, useLayoutEffect, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { BadgeCheck, ChevronsDown, Eye, Hammer, Puzzle, Rocket, ShieldCheck, Shuffle, Users } from 'lucide-react';
+import RotatingRole from '../components/RotatingRole';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -101,13 +103,28 @@ const HeroSection = () => {
         0.3
       );
 
-      // Values entrance
+      // Name: letters blur and flip in one by one
+      const letters = nameRef.current?.querySelectorAll('.split-letter');
+      if (letters?.length) {
+        tl.fromTo(
+          letters,
+          { opacity: 0, y: 46, rotateX: -80, filter: 'blur(10px)' },
+          { opacity: 1, y: 0, rotateX: 0, filter: 'blur(0px)', duration: 0.9, stagger: 0.09, ease: 'back.out(1.6)' },
+          0.45
+        );
+      }
+
+      // Values entrance: chips pop in one after another
       tl.fromTo(
         valuesRef.current,
         { opacity: 0, y: 30 },
         { opacity: 1, y: 0, duration: 0.8 },
         0.6
       );
+      const chips = valuesRef.current?.querySelectorAll('.value-chip');
+      if (chips?.length) {
+        tl.fromTo(chips, { opacity: 0, y: 14, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.5, stagger: 0.06, ease: 'back.out(1.8)' }, 0.8);
+      }
 
     }, sectionRef);
 
@@ -342,13 +359,13 @@ const HeroSection = () => {
   };
 
   const values = [
-    'Problem Solving',
-    'Reliability',
-    'Adaptability',
-    'Teamwork',
-    'Initiative',
-    'Accountability',
-    'Work Ethic',
+    { name: 'Problem Solving', icon: Puzzle },
+    { name: 'Reliability', icon: ShieldCheck },
+    { name: 'Adaptability', icon: Shuffle },
+    { name: 'Teamwork', icon: Users },
+    { name: 'Initiative', icon: Rocket },
+    { name: 'Accountability', icon: BadgeCheck },
+    { name: 'Work Ethic', icon: Hammer },
   ];
 
   return (
@@ -424,14 +441,21 @@ const HeroSection = () => {
               Hi! I am
             </span>
             
-            <h1 ref={nameRef} className="text-5xl lg:text-7xl font-bold text-gradient mb-4 no-text-outline">
-              Zacc
+            <h1 ref={nameRef} className="text-4xl lg:text-6xl font-bold text-gradient mb-3 no-text-outline" aria-label="Zacc" style={{ perspective: '600px' }}>
+              {'Zacc'.split('').map((ch, i) => (
+                <span key={i} className="split-letter" aria-hidden>
+                  {ch}
+                </span>
+              ))}
             </h1>
             <p className="text-[#a3b97a] text-xs mb-1">
               ZCSALWEEMNHARR E. BANDAHALA
             </p>
-            <p className="font-mono text-xs tracking-[0.2em] uppercase text-[#708238] mb-4">
+            <p className="font-mono text-xs tracking-[0.2em] uppercase text-[#708238] mb-3">
               Multi-Skilled Professional
+            </p>
+            <p className="text-[#a3b97a] text-base mb-5">
+              Skilled in <RotatingRole />
             </p>
 
             <div className="space-y-4 text-[#b7c98a]/80 text-base lg:text-lg leading-relaxed max-w-2xl">
@@ -439,10 +463,10 @@ const HeroSection = () => {
                 <button
                   type="button"
                   onClick={() => setShowInfo(true)}
-                  className="uiverse-fun-btn inline-flex items-center justify-center"
-                  aria-label="View info"
+                  className="stone-btn"
                 >
-                  <span className="uiverse-fun-btn__label">VIEW INFO</span>
+                  <Eye size={16} aria-hidden />
+                  <span>View info</span>
                 </button>
               ) : null}
               {showInfo ? (
@@ -475,15 +499,16 @@ const HeroSection = () => {
           </span>
           {values.map((value) => (
             <div
-              key={value}
-              className="flex items-center gap-2 px-4 py-2 rounded-full bg-[#708238]/10 border border-[#708238]/20"
+              key={value.name}
+              className="value-chip group flex items-center gap-2 px-4 py-2 rounded-full bg-[#708238]/10 border border-[#708238]/20 transition-colors duration-300 hover:bg-[#708238]/20 hover:border-[#708238]/45"
             >
-              <span className="text-sm text-[#a3b97a]/70">{value}</span>
+              <value.icon size={16} className="text-[#9fbe66] transition-transform duration-300 group-hover:-rotate-12 group-hover:scale-125" aria-hidden />
+              <span className="text-sm text-[#a3b97a]/70">{value.name}</span>
             </div>
           ))}
           <div className="w-full flex justify-center mt-2">
-            <a href="#work" aria-label="Scroll down" className="slow-down-arrow text-[#7aa24a] text-4xl leading-none">
-              ↓
+            <a href="#projects" aria-label="Scroll to projects" className="slow-down-arrow text-[#7aa24a] leading-none">
+              <ChevronsDown size={36} strokeWidth={1.75} />
             </a>
           </div>
         </div>

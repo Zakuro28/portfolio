@@ -1,50 +1,72 @@
 ﻿import { useRef, useLayoutEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Wrench, Workflow } from 'lucide-react';
+import { ClipboardCheck, Code2, Database, GitBranch, Headset, ShieldCheck, Workflow } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const toolkits = [
   {
-    category: 'Tools & Technologies',
-    icon: Wrench,
+    category: 'Web Development',
+    icon: Code2,
     items: [
-      'Visual Studio',
-      'VS Code',
-      'Git',
-      'GitHub',
-      'MySQL',
-      'SQL',
-      'XAMPP',
-      'phpMyAdmin',
-      'HTML',
-      'CSS',
-      'JavaScript',
-      'PHP',
-      'Bootstrap',
-      'SPSS',
-      'Draw.io',
-      'Microsoft Office',
-      'Google Workspace',
-      'Windows Environment',
-      'Basic Networking Tools',
+      'HTML5', 'CSS3', 'JavaScript', 'TypeScript', 'React', 'Vite', 'Tailwind CSS', 'Bootstrap',
+      'PHP', 'Laravel', 'Blade', 'Java', 'C++', 'REST APIs', 'JSON', 'Responsive design',
+    ],
+  },
+  {
+    category: 'Databases & Analytics',
+    icon: Database,
+    items: [
+      'MySQL', 'SQL', 'PL/SQL', 'phpMyAdmin', 'XAMPP', 'Database design', 'ER diagrams',
+      'SPSS', 'Microsoft Excel', 'Google Sheets', 'Pivot tables', 'Data cleaning', 'Reports & summaries',
+    ],
+  },
+  {
+    category: 'QA & Testing',
+    icon: ShieldCheck,
+    items: [
+      'Manual testing', 'Test cases & test plans', 'Bug reporting', 'Regression testing',
+      'Cross-browser testing', 'Mobile & responsive testing', 'API testing', 'Chrome DevTools',
+      'Lighthouse', 'Thunder Client', 'Playwright',
+    ],
+  },
+  {
+    category: 'Dev Tools & Deployment',
+    icon: GitBranch,
+    items: [
+      'Git', 'GitHub', 'GitHub CLI', 'VS Code', 'Visual Studio', 'npm', 'Vercel', 'Render',
+      'Draw.io', 'Microsoft Office', 'Google Workspace', 'Windows', 'Basic networking',
+    ],
+  },
+  {
+    category: 'Customer Support & Operations',
+    icon: Headset,
+    items: [
+      'Live chat support', 'Handling multiple chats', 'Ticketing & CRM systems', 'Knowledge bases & SOPs',
+      'Escalation handling', 'Account troubleshooting', 'Order inquiries', 'E-commerce orders & listings',
+      'Response-time & CSAT targets', 'Quality scorecards', 'Team coordination',
+    ],
+  },
+  {
+    category: 'Medical Claims',
+    icon: ClipboardCheck,
+    items: [
+      'Claims review & validation', 'Insurance information checks', 'Patient & provider data',
+      'Billing discrepancy analysis', 'Medical documentation review', 'Claims processing systems',
+      'Productivity & quality targets', 'Confidential data handling',
     ],
   },
   {
     category: 'Methodologies & Practices',
     icon: Workflow,
+    wide: true,
     items: [
-      'Agile methodology',
-      'Collaborative development',
-      'Version control workflow (Git-based)',
-      'Debugging and troubleshooting',
-      'Database design and optimization',
-      'Responsive web design',
-      'System analysis and documentation',
-      'Continuous improvement',
-      'Performance optimization',
-      'Security best practices',
+      'Agile & Scrum', 'Software development life cycle', 'Git branching & pull requests', 'Code review',
+      'Collaborative development', 'Debugging & troubleshooting', 'Root-cause analysis', 'Database normalization',
+      'Requirements gathering', 'System analysis & documentation', 'Following & writing SOPs', 'Process improvement',
+      'Performance optimization', 'Accessibility basics', 'Security best practices', 'Data privacy',
+      'KPI tracking', 'Continuous learning',
     ],
   },
 ];
@@ -84,14 +106,15 @@ const ExtracurricularSection = () => {
 
       cardsRef.current.forEach((card, index) => {
         if (!card) return;
+        const left = index % 2 === 0;
         gsap.fromTo(
           card,
           {
             opacity: 0,
-            xPercent: index === 0 ? -22 : 22,
+            xPercent: left ? -12 : 12,
             y: 70,
-            rotationY: index === 0 ? -18 : 18,
-            rotateZ: index === 0 ? -1.5 : 1.5,
+            rotationY: left ? -14 : 14,
+            rotateZ: left ? -1.5 : 1.5,
             transformPerspective: 1200,
             clipPath: 'inset(18% 8% 22% 8% round 20px)',
             filter: 'blur(8px)',
@@ -133,37 +156,41 @@ const ExtracurricularSection = () => {
         <span className="font-mono text-xs tracking-[0.2em] uppercase text-[#708238] block mb-2">
           Tools
         </span>
-        <h2 className="text-[clamp(34px,3.6vw,52px)] font-bold text-gradient mb-4">
+        <h2 className="text-[clamp(26px,2.5vw,36px)] font-bold text-gradient mb-4">
           Tools & Methodologies
         </h2>
-        <p className="text-[#a3b97a]/70 text-[clamp(14px,1.1vw,17px)] max-w-2xl mx-auto leading-relaxed">
-          Development tools, workflow methods, and quality practices used in day-to-day execution.
+        <p className="text-[#a3b97a]/70 text-[clamp(14px,1vw,15px)] max-w-2xl mx-auto leading-relaxed">
+          The tools, systems and working methods behind my web development, QA, support, claims and analytics work.
         </p>
       </div>
 
-      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {toolkits.map((category, index) => (
           <div
             key={category.category}
             ref={(el) => {
               cardsRef.current[index] = el;
             }}
-            className="group p-6 rounded-2xl card-glass hover:bg-[#708238]/10 transition-all duration-300"
+            className={`group p-6 rounded-2xl card-glass hover:bg-[#708238]/10 transition-all duration-300 ${
+              category.wide ? 'md:col-span-2 lg:col-span-3' : ''
+            }`}
           >
             <div className="flex items-center gap-3 mb-4 pb-4 border-b border-[#708238]/20">
-              <div className="p-2 rounded-lg bg-[#708238]/10 text-[#708238]">
+              <div className="p-2 rounded-lg bg-[#708238]/10 text-[#708238] transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-110">
                 <category.icon size={20} />
               </div>
-              <h3 className="text-[#f2f6e8] font-semibold text-sm">{category.category}</h3>
+              <h3 className="text-[#f2f6e8] font-semibold">{category.category}</h3>
+              <span className="ml-auto text-xs text-[#a3b97a]/70">{category.items.length}</span>
             </div>
 
-            <ul
-              className={`text-sm text-[#b7c98a] list-disc list-outside pl-5 space-y-2 ${
-                category.category === 'Tools & Technologies' ? 'md:grid md:grid-cols-2 md:gap-x-6 md:gap-y-2' : ''
-              }`}
-            >
+            <ul className="tool-chips flex flex-wrap gap-2">
               {category.items.map((item) => (
-                <li key={item}>{item}</li>
+                <li
+                  key={item}
+                  className="rounded-full border border-[#708238]/25 bg-[#708238]/10 px-3 py-1 text-xs text-[#b7c98a] transition-colors duration-200 hover:border-[#708238]/60 hover:bg-[#708238]/25"
+                >
+                  {item}
+                </li>
               ))}
             </ul>
           </div>

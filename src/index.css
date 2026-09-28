@@ -152,152 +152,6 @@
   }
 
 
-  .uiverse-fun-btn {
-    position: relative;
-    isolation: isolate;
-    overflow: hidden;
-    border: 1px solid #8a7f72;
-    border-radius: 999px;
-    padding: 0.78rem 1.2rem;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: #f2f6e8;
-    background: linear-gradient(145deg, #5b5146 0%, #7b6f61 50%, #4d443b 100%);
-    box-shadow:
-      inset 0 1px 0 rgba(214, 205, 190, 0.28),
-      inset 0 -2px 0 rgba(45, 39, 33, 0.4),
-      0 10px 24px rgba(23, 20, 17, 0.55);
-    transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease, filter 220ms ease;
-  }
-
-  .uiverse-fun-btn::before {
-    content: '';
-    position: absolute;
-    inset: -150% -45%;
-    z-index: -1;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.16), transparent);
-    transform: translateX(-100%) rotate(18deg);
-    transition: transform 500ms ease;
-  }
-
-  .uiverse-fun-btn::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    pointer-events: none;
-    opacity: 0.34;
-    background:
-      repeating-linear-gradient(
-        24deg,
-        transparent 0 16px,
-        rgba(33, 28, 23, 0.45) 16px 18px,
-        transparent 18px 34px
-      ),
-      repeating-linear-gradient(
-        -31deg,
-        transparent 0 22px,
-        rgba(214, 205, 190, 0.18) 22px 24px,
-        transparent 24px 46px
-      );
-  }
-
-  .uiverse-fun-btn:hover {
-    transform: translateY(-2px) scale(1.02);
-    border-color: #b6a996;
-    box-shadow:
-      inset 0 1px 0 rgba(232, 224, 210, 0.38),
-      inset 0 -2px 0 rgba(40, 35, 30, 0.5),
-      0 16px 34px rgba(20, 17, 14, 0.62);
-    filter: saturate(0.9);
-  }
-
-  .uiverse-fun-btn:hover::before {
-    transform: translateX(100%) rotate(18deg);
-  }
-
-  .uiverse-fun-btn:active {
-    transform: translateY(1px) scale(0.99);
-  }
-
-  .uiverse-fun-btn__label {
-    position: relative;
-    z-index: 1;
-  }
-
-  .uiverse-fun-btn__icon {
-    position: relative;
-    z-index: 1;
-    animation: btn-float 1.8s ease-in-out infinite;
-  }
-
-  .uiverse-nav-btn {
-    position: relative;
-    overflow: hidden;
-    padding: 0.48rem 0.86rem;
-    border-radius: 999px;
-    border: 1px solid #877b6d;
-    background: linear-gradient(155deg, rgba(86, 77, 67, 0.75) 0%, rgba(58, 50, 43, 0.82) 100%);
-    box-shadow:
-      inset 0 1px 0 rgba(218, 207, 189, 0.18),
-      inset 0 -2px 0 rgba(34, 29, 24, 0.35);
-    transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease, background 220ms ease;
-    animation: nav-item-in 420ms ease both;
-    animation-delay: calc(var(--nav-i, 0) * 70ms);
-  }
-
-  .uiverse-nav-btn::before {
-    content: '';
-    position: absolute;
-    inset: -120% -35%;
-    background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.12), transparent);
-    transform: translateX(-120%) rotate(16deg);
-    transition: transform 420ms ease;
-    pointer-events: none;
-  }
-
-  .uiverse-nav-btn::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    pointer-events: none;
-    opacity: 0.3;
-    background:
-      repeating-linear-gradient(
-        19deg,
-        transparent 0 14px,
-        rgba(32, 27, 23, 0.4) 14px 16px,
-        transparent 16px 30px
-      );
-  }
-
-  .uiverse-nav-btn:hover {
-    transform: translateY(-1px) scale(1.03);
-    border-color: #b7a993;
-    background: linear-gradient(160deg, rgba(111, 99, 85, 0.82) 0%, rgba(73, 63, 54, 0.86) 100%);
-    box-shadow:
-      inset 0 1px 0 rgba(231, 222, 207, 0.24),
-      inset 0 -2px 0 rgba(34, 29, 24, 0.42),
-      0 8px 20px rgba(24, 21, 18, 0.45);
-  }
-
-  .uiverse-nav-btn:hover::before {
-    transform: translateX(120%) rotate(16deg);
-  }
-
-  .uiverse-nav-btn:active {
-    transform: translateY(0) scale(0.99);
-  }
-
-  .uiverse-nav-btn--mobile {
-    min-width: 220px;
-    padding: 0.8rem 1rem;
-    text-align: center;
-  }
-
   .theme-toggle-icons {
     width: 64px;
     height: 34px;
@@ -495,9 +349,10 @@
   mix-blend-mode: multiply;
 }
 
+/* The page itself carries the light background, so the aurora can show through */
 :root.light .bg-\[\#0a0a0f\],
 :root.light .bg-\[\#0d0d14\] {
-  background-color: #E3DAC9 !important;
+  background-color: transparent !important;
 }
 
 :root.light .card-glass {
@@ -523,17 +378,6 @@
   transform-origin: center;
 }
 
-:root.light .uiverse-nav-btn {
-  border-color: rgba(133, 121, 106, 0.45);
-  background: linear-gradient(160deg, rgba(214, 202, 184, 0.45) 0%, rgba(171, 156, 137, 0.34) 100%);
-}
-
-:root.light .uiverse-nav-btn:hover {
-  border-color: rgba(120, 107, 92, 0.65);
-  background: linear-gradient(160deg, rgba(229, 219, 204, 0.52) 0%, rgba(184, 168, 149, 0.44) 100%);
-  box-shadow: 0 10px 20px rgba(56, 45, 35, 0.25);
-}
-
 /* Force all readable text to green */
 :root {
   --global-text-green: #9fbe66;
@@ -550,15 +394,18 @@ body :is(h1, h2, h3, h4, h5, h6, p, span, a, button, label, li, blockquote, smal
 
 /* Standard body text size baseline */
 body :is(p, span, a, label, li, blockquote, small, em, strong) {
-  font-size: 1rem !important;
-  line-height: 1.7 !important;
+  font-size: 0.9375rem !important;
+  line-height: 1.6 !important;
 }
 
-/* Normalize common Tailwind small text utilities to the same baseline */
-body .text-xs,
+/* Small text utilities keep their normal, smaller sizes */
 body .text-sm {
-  font-size: 1rem !important;
-  line-height: 1.7 !important;
+  font-size: 0.875rem !important;
+  line-height: 1.55 !important;
+}
+body .text-xs {
+  font-size: 0.8125rem !important;
+  line-height: 1.5 !important;
 }
 
 body :is(p, li, blockquote) {
@@ -589,88 +436,13 @@ body .text-center :is(p, li, blockquote) {
   opacity: 0.55;
 }
 
-/* Keep button text readable against green button backgrounds */
-.uiverse-fun-btn,
-.uiverse-fun-btn * {
-  color: #8fbf58 !important;
-  -webkit-text-fill-color: #8fbf58 !important;
-}
-
-.linkedin-cta-btn,
-.linkedin-cta-btn * {
-  color: #8fbf58 !important;
-  -webkit-text-fill-color: #8fbf58 !important;
-}
-
-.linkedin-cta-btn {
-  border: 1px solid #8d8072 !important;
-  background: linear-gradient(145deg, #5d5348 0%, #7c6f60 50%, #4f463d 100%) !important;
-  box-shadow:
-    inset 0 1px 0 rgba(228, 219, 205, 0.3),
-    inset 0 -2px 0 rgba(38, 32, 27, 0.45),
-    0 10px 22px rgba(20, 17, 14, 0.55) !important;
-}
-
-.linkedin-cta-btn:hover {
-  background: linear-gradient(145deg, #736657 0%, #948571 50%, #5f5448 100%) !important;
-  border-color: #b6a590 !important;
-}
-
-.skills-tab-btn,
-.skills-tab-btn * {
-  color: #8fbf58 !important;
-  -webkit-text-fill-color: #8fbf58 !important;
-}
-
-.skills-tab-btn {
-  border: 1px solid #857969 !important;
-  background: linear-gradient(150deg, rgba(86, 77, 67, 0.86) 0%, rgba(60, 52, 44, 0.9) 100%) !important;
-  box-shadow:
-    inset 0 1px 0 rgba(226, 217, 201, 0.24),
-    inset 0 -2px 0 rgba(33, 28, 23, 0.42) !important;
-}
-
-.skills-tab-btn:hover {
-  border-color: #a99a86 !important;
-  background: linear-gradient(150deg, rgba(112, 99, 84, 0.92) 0%, rgba(76, 66, 56, 0.94) 100%) !important;
-}
-
-/* Green outline for all white text */
-.uiverse-fun-btn,
-.uiverse-fun-btn *,
-.linkedin-cta-btn,
-.linkedin-cta-btn *,
-.skills-tab-btn,
-.skills-tab-btn *,
+/* Green outline for white text */
 [class*="text-white"] {
   text-shadow:
     -1px -1px 0 #1e2c10,
     1px -1px 0 #1e2c10,
     -1px 1px 0 #1e2c10,
     1px 1px 0 #1e2c10;
-}
-
-.linkedin-cta-btn,
-.skills-tab-btn {
-  position: relative;
-  overflow: hidden;
-}
-
-.linkedin-cta-btn::after,
-.skills-tab-btn::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  pointer-events: none;
-  opacity: 0.28;
-  background:
-    repeating-linear-gradient(
-      28deg,
-      transparent 0 16px,
-      rgba(33, 28, 23, 0.42) 16px 18px,
-      transparent 18px 35px
-    );
 }
 
 .ui-input {
@@ -694,44 +466,6 @@ body .text-center :is(p, li, blockquote) {
   border-color: rgba(95, 122, 47, 0.35);
 }
 
-:root.light .uiverse-fun-btn,
-:root.light .linkedin-cta-btn,
-:root.light .skills-tab-btn {
-  border-color: rgba(133, 121, 106, 0.45) !important;
-  background: linear-gradient(160deg, rgba(214, 202, 184, 0.45) 0%, rgba(171, 156, 137, 0.34) 100%) !important;
-  box-shadow:
-    inset 0 1px 0 rgba(218, 207, 189, 0.18),
-    inset 0 -2px 0 rgba(34, 29, 24, 0.28),
-    0 8px 20px rgba(56, 45, 35, 0.22) !important;
-}
-
-:root.light .uiverse-fun-btn:hover,
-:root.light .linkedin-cta-btn:hover,
-:root.light .skills-tab-btn:hover {
-  border-color: rgba(120, 107, 92, 0.65) !important;
-  background: linear-gradient(160deg, rgba(229, 219, 204, 0.52) 0%, rgba(184, 168, 149, 0.44) 100%) !important;
-  box-shadow:
-    inset 0 1px 0 rgba(231, 222, 207, 0.24),
-    inset 0 -2px 0 rgba(34, 29, 24, 0.32),
-    0 10px 20px rgba(56, 45, 35, 0.25) !important;
-}
-
-:root.light .uiverse-fun-btn,
-:root.light .uiverse-fun-btn *,
-:root.light .linkedin-cta-btn,
-:root.light .linkedin-cta-btn *,
-:root.light .skills-tab-btn,
-:root.light .skills-tab-btn * {
-  color: #365017 !important;
-  -webkit-text-fill-color: #365017 !important;
-  text-shadow: none !important;
-}
-
-:root.light .uiverse-fun-btn::after,
-:root.light .linkedin-cta-btn::after,
-:root.light .skills-tab-btn::after {
-  opacity: 0.16 !important;
-}
 
 
 
@@ -757,4 +491,392 @@ body .text-center :is(p, li, blockquote) {
     radial-gradient(circle at 0 0, transparent 0 9px, rgba(36, 66, 26, 0.35) 10px 11px, transparent 12px) 0 0 / 22px 22px,
     radial-gradient(circle at 11px 11px, transparent 0 9px, rgba(36, 66, 26, 0.35) 10px 11px, transparent 12px) 0 0 / 22px 22px;
   mix-blend-mode: soft-light;
+}
+
+/* ---------- Aurora background (after auragradients.vercel.app) ---------- */
+.aura {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.aura__blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(110px);
+  opacity: 0.8;
+  will-change: transform;
+}
+.aura__blob--a {
+  width: 52vmax;
+  height: 52vmax;
+  left: -18vmax;
+  top: -20vmax;
+  background: radial-gradient(circle, rgba(112, 130, 56, 0.55), transparent 65%);
+  animation: aura-drift-a 26s ease-in-out infinite alternate;
+}
+.aura__blob--b {
+  width: 46vmax;
+  height: 46vmax;
+  right: -16vmax;
+  top: 18vh;
+  background: radial-gradient(circle, rgba(58, 110, 84, 0.5), transparent 65%);
+  animation: aura-drift-b 32s ease-in-out infinite alternate;
+}
+.aura__blob--c {
+  width: 40vmax;
+  height: 40vmax;
+  left: 22vw;
+  bottom: -22vmax;
+  background: radial-gradient(circle, rgba(163, 185, 122, 0.32), transparent 65%);
+  animation: aura-drift-c 38s ease-in-out infinite alternate;
+}
+.aura__blob--d {
+  width: 26vmax;
+  height: 26vmax;
+  right: 18vw;
+  bottom: 8vh;
+  background: radial-gradient(circle, rgba(196, 160, 72, 0.18), transparent 65%);
+  animation: aura-drift-a 44s ease-in-out infinite alternate-reverse;
+}
+/* Keeps text contrast: darkens the aurora toward the edges */
+.aura__veil {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 30%, rgba(10, 10, 15, 0.55) 100%);
+}
+@keyframes aura-drift-a {
+  to { transform: translate3d(14vw, 10vh, 0) scale(1.15); }
+}
+@keyframes aura-drift-b {
+  to { transform: translate3d(-12vw, 16vh, 0) scale(0.9); }
+}
+@keyframes aura-drift-c {
+  to { transform: translate3d(10vw, -14vh, 0) scale(1.2); }
+}
+:root.light .aura__blob { opacity: 0.35; mix-blend-mode: multiply; }
+:root.light .aura__veil { background: none; }
+
+/* ---------- Spotlight that follows the pointer on glass cards (after React Bits' Spotlight Card) ---------- */
+.card-glass::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 300ms ease;
+  background: radial-gradient(420px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(214, 233, 160, 0.16), transparent 60%);
+}
+.card-glass.is-lit::after { opacity: 1; }
+:root.light .card-glass::after {
+  background: radial-gradient(420px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(255, 255, 255, 0.5), transparent 60%);
+}
+
+/* ---------- Hero name: letters blur in one by one (after React Bits' Split/Blur Text) ---------- */
+.split-letter {
+  display: inline-block;
+  will-change: transform, filter, opacity;
+}
+
+/* ---------- Rotating role line (after React Bits' Rotating Text) ---------- */
+.role-rotator {
+  position: relative;
+  display: inline-grid;
+  overflow: hidden;
+  vertical-align: bottom;
+  padding: 0.1em 0.55em;
+  border-radius: 0.6em;
+  background: rgba(112, 130, 56, 0.16);
+  border: 1px solid rgba(112, 130, 56, 0.35);
+  transition: width 420ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.role-rotator__word {
+  grid-area: 1 / 1;
+  white-space: nowrap;
+  transition: transform 520ms cubic-bezier(0.22, 1, 0.36, 1), opacity 420ms ease, filter 420ms ease;
+}
+.role-rotator__word[data-state='in'] { transform: translateY(0); opacity: 1; filter: blur(0); }
+.role-rotator__word[data-state='below'] { transform: translateY(110%); opacity: 0; filter: blur(4px); }
+.role-rotator__word[data-state='above'] { transform: translateY(-110%); opacity: 0; filter: blur(4px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .aura__blob { animation: none; }
+  .role-rotator__word { transition: none; }
+}
+
+/* The site-wide 1rem rule for spans must not shrink these */
+body h1 .split-letter {
+  font-size: inherit !important;
+  line-height: inherit !important;
+}
+body .tech-marquee .tech-name {
+  font-size: clamp(1.1rem, 1.7vw, 1.45rem) !important;
+  line-height: 1.2 !important;
+}
+
+/* ---------- Soft / Hard skills switch ---------- */
+.skills-switch {
+  border: 1px solid #857969;
+  background: linear-gradient(150deg, rgba(86, 77, 67, 0.86) 0%, rgba(60, 52, 44, 0.9) 100%);
+  box-shadow:
+    inset 0 2px 6px rgba(20, 16, 12, 0.55),
+    inset 0 -1px 0 rgba(226, 217, 201, 0.12);
+}
+.skills-switch__thumb {
+  position: absolute;
+  top: 0.375rem;
+  bottom: 0.375rem;
+  left: 0.375rem;
+  width: calc(50% - 0.375rem);
+  border-radius: 999px;
+  background: linear-gradient(150deg, #8fae4a 0%, #708238 55%, #556b2f 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(236, 246, 205, 0.45),
+    0 6px 18px rgba(112, 130, 56, 0.45);
+  transition: transform 520ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.skills-switch__thumb[data-side='hard'] {
+  transform: translateX(100%);
+}
+body .skills-switch__btn {
+  transition: color 300ms ease;
+}
+body .skills-switch__btn,
+body .skills-switch__btn span {
+  font-size: 0.9375rem !important;
+}
+body .skills-switch__btn[aria-selected='true'] {
+  color: #0f1a08 !important;
+}
+body .skills-switch__btn[aria-selected='false'] {
+  color: #a3b97a !important;
+}
+body .skills-switch__btn[aria-selected='false']:hover {
+  color: #d3e6a8 !important;
+}
+.skills-switch__btn:focus-visible {
+  outline: 2px solid #b9cc8f;
+  outline-offset: 2px;
+}
+:root.light .skills-switch {
+  border-color: rgba(133, 121, 106, 0.45);
+  background: linear-gradient(160deg, rgba(214, 202, 184, 0.6) 0%, rgba(171, 156, 137, 0.45) 100%);
+  box-shadow: inset 0 2px 5px rgba(56, 45, 35, 0.2);
+}
+:root.light body .skills-switch__btn[aria-selected='true'] {
+  color: #f4f8e8 !important;
+}
+:root.light body .skills-switch__btn[aria-selected='false'] {
+  color: #365017 !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  .skills-switch__thumb { transition: none; }
+}
+
+/* ======================================================================
+   Stone buttons: carved granite, with a moss/jade variant for main actions
+   ====================================================================== */
+:root {
+  /* Fine grain and larger mottling, both from SVG noise */
+  --stone-grain: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.1  0 0 0 0 0.09  0 0 0 0 0.07  0 0 0 0.6 0'/></filter><rect width='100%' height='100%' filter='url(%23g)'/></svg>");
+  --stone-mottle: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='320' height='160'><filter id='m'><feTurbulence type='fractalNoise' baseFrequency='0.028 0.06' numOctaves='4' seed='7'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 0.96  0 0 0 0 0.88  0 0 0 0.55 -0.24'/></filter><rect width='100%' height='100%' filter='url(%23m)'/></svg>");
+  --stone-face: linear-gradient(160deg, #7b7266 0%, #5f574d 45%, #4a433b 100%);
+  --stone-edge: #2b251f;
+  --moss-face: linear-gradient(160deg, #6f8a3c 0%, #536c29 50%, #3c5220 100%);
+  --moss-mottle: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='320' height='160'><filter id='j'><feTurbulence type='fractalNoise' baseFrequency='0.03 0.07' numOctaves='4' seed='13'/><feColorMatrix values='0 0 0 0 0.08  0 0 0 0 0.14  0 0 0 0 0.04  0 0 0 0.9 -0.3'/></filter><rect width='100%' height='100%' filter='url(%23j)'/></svg>");
+  --moss-edge: #1f2c10;
+}
+
+.stone-btn {
+  --face: var(--stone-face);
+  --edge: var(--stone-edge);
+  --lift: 4px;
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0.8rem 1.4rem;
+  /* Chiselled, slightly uneven corners */
+  border-radius: 14px 18px 12px 20px / 16px 12px 18px 14px;
+  border: 1px solid rgba(0, 0, 0, 0.35);
+  background: var(--stone-mottle), var(--stone-grain), var(--face);
+  background-size: 320px 160px, 180px 180px, cover;
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow:
+    inset 1px 2px 0 rgba(255, 248, 230, 0.22),
+    inset -2px -3px 0 rgba(0, 0, 0, 0.28),
+    inset 0 0 12px rgba(0, 0, 0, 0.25),
+    0 var(--lift) 0 var(--edge),
+    0 calc(var(--lift) + 8px) 18px rgba(0, 0, 0, 0.45);
+  transform: translateY(0);
+  transition: transform 160ms ease, box-shadow 160ms ease, filter 200ms ease;
+}
+
+/* A thin hairline crack across the face */
+.stone-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+  background:
+    linear-gradient(118deg, transparent 0 62%, rgba(0, 0, 0, 0.32) 62.3%, transparent 63.2%),
+    linear-gradient(64deg, transparent 0 71%, rgba(0, 0, 0, 0.22) 71.2%, transparent 71.9%);
+  mix-blend-mode: multiply;
+}
+
+/* Moss light that seeps through on hover */
+.stone-btn::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  box-shadow: 0 0 0 1px rgba(170, 205, 96, 0.55), 0 0 22px rgba(143, 190, 70, 0.35);
+  transition: opacity 220ms ease;
+}
+
+/* Lettering carved into the stone */
+body .stone-btn,
+body .stone-btn * {
+  color: #eee6d6 !important;
+  -webkit-text-fill-color: #eee6d6 !important;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.7), 0 1px 0 rgba(255, 248, 230, 0.18) !important;
+}
+body .stone-btn svg {
+  filter: drop-shadow(0 -1px 0 rgba(0, 0, 0, 0.6));
+}
+
+.stone-btn:hover {
+  --lift: 6px;
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+}
+.stone-btn:hover::after {
+  opacity: 1;
+}
+/* Pressed into its slab */
+.stone-btn:active {
+  --lift: 1px;
+  transform: translateY(3px);
+  filter: brightness(0.96);
+}
+.stone-btn:focus-visible {
+  outline: 2px solid #b9d67a;
+  outline-offset: 4px;
+}
+.stone-btn:disabled {
+  cursor: not-allowed;
+  filter: grayscale(0.4) brightness(0.85);
+  transform: none;
+}
+
+/* Main actions: green jade stone */
+.stone-btn--moss {
+  --face: var(--moss-face);
+  --edge: var(--moss-edge);
+  background: var(--moss-mottle), var(--stone-grain), var(--moss-face);
+  background-size: 320px 160px, 180px 180px, cover;
+}
+body .stone-btn--moss,
+body .stone-btn--moss * {
+  color: #f3f8e2 !important;
+  -webkit-text-fill-color: #f3f8e2 !important;
+}
+
+/* Menu pebbles: smaller, quicker */
+.stone-btn--pebble {
+  --lift: 3px;
+  padding: 0.42rem 0.9rem;
+  border-radius: 12px 15px 10px 16px / 13px 10px 15px 12px;
+  letter-spacing: 0.16em;
+  animation: nav-item-in 420ms ease both;
+  animation-delay: calc(var(--nav-i, 0) * 70ms);
+}
+.stone-btn--pebble:hover {
+  --lift: 4px;
+}
+.stone-btn--wide {
+  display: flex;
+  width: 100%;
+}
+
+/* Light mode: pale limestone */
+:root.light {
+  --stone-face: linear-gradient(160deg, #e3dac9 0%, #cbbfa9 50%, #b3a68e 100%);
+  --stone-edge: #8c7f69;
+}
+:root.light body .stone-btn:not(.stone-btn--moss),
+:root.light body .stone-btn:not(.stone-btn--moss) * {
+  color: #3a3226 !important;
+  -webkit-text-fill-color: #3a3226 !important;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.55), 0 -1px 0 rgba(0, 0, 0, 0.15) !important;
+}
+:root.light .stone-btn {
+  box-shadow:
+    inset 1px 2px 0 rgba(255, 255, 255, 0.55),
+    inset -2px -3px 0 rgba(0, 0, 0, 0.12),
+    0 var(--lift) 0 var(--edge),
+    0 calc(var(--lift) + 8px) 16px rgba(60, 48, 30, 0.25);
+}
+
+/* The skills switch becomes a stone slab with a jade thumb */
+.skills-switch {
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  background: var(--stone-mottle), var(--stone-grain), var(--stone-face);
+  background-size: 320px 160px, 180px 180px, cover;
+  box-shadow:
+    inset 0 3px 8px rgba(0, 0, 0, 0.55),
+    inset 0 -1px 0 rgba(255, 248, 230, 0.12),
+    0 1px 0 rgba(255, 248, 230, 0.08);
+}
+.skills-switch__thumb {
+  background: var(--stone-grain), var(--moss-face);
+  background-size: 180px 180px, cover;
+  box-shadow:
+    inset 1px 2px 0 rgba(236, 246, 205, 0.35),
+    inset -1px -2px 0 rgba(0, 0, 0, 0.3),
+    0 3px 0 var(--moss-edge),
+    0 8px 16px rgba(0, 0, 0, 0.4);
+}
+body .skills-switch__btn[aria-selected='true'],
+:root.light body .skills-switch__btn[aria-selected='true'] {
+  color: #f3f8e2 !important;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.6) !important;
+}
+body .skills-switch__btn[aria-selected='false'] {
+  color: #e6ddcc !important;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.7) !important;
+}
+:root.light body .skills-switch__btn[aria-selected='false'] {
+  color: #3a3226 !important;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) !important;
+}
+:root.light .skills-switch {
+  box-shadow: inset 0 3px 8px rgba(60, 48, 30, 0.3);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stone-btn,
+  .stone-btn--pebble {
+    transition: none;
+    animation: none;
+  }
+}
+
+/* Stone lettering keeps its own size, whatever the site-wide text rules say */
+body .stone-btn,
+body .stone-btn * {
+  font-size: var(--stone-fs, 0.8rem) !important;
+  line-height: 1.2 !important;
 }

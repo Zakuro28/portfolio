@@ -112,10 +112,10 @@ const CapabilitiesSection = () => {
       <div className="flex flex-col lg:flex-row gap-12 lg:gap-[8vw]">
         {/* Left headline */}
         <div ref={headlineRef} className="lg:w-[40vw] lg:sticky lg:top-[20vh] lg:self-start">
-          <h2 className="text-[clamp(34px,3.6vw,52px)] font-semibold text-[#F4F6FF] mb-4">
+          <h2 className="text-[clamp(26px,2.5vw,36px)] font-semibold text-[#F4F6FF] mb-4">
             Capabilities
           </h2>
-          <p className="text-[#A7B0C8] text-[clamp(14px,1.1vw,17px)] leading-relaxed">
+          <p className="text-[#A7B0C8] text-[clamp(14px,1vw,15px)] leading-relaxed">
             I work across the frontend stack, from UI engineering to real-time
             graphics.
           </p>

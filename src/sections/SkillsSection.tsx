@@ -4,7 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import {
   Database, Code2, GitBranch, ShieldCheck,
   MessageSquare, Users, Lightbulb, Clock, Target,
-  ClipboardCheck, Headset
+  ClipboardCheck, Headset, HeartHandshake, Cpu
 } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -27,6 +27,11 @@ const hardSkills = [
   { icon: ShieldCheck, name: 'Testing, Debugging & Quality', level: 88 },
   { icon: ClipboardCheck, name: 'Medical Claims Processing', level: 88 },
   { icon: Headset, name: 'Customer Support', level: 90 },
+];
+
+const SWITCH = [
+  { id: 'soft' as const, label: 'Soft Skills', icon: HeartHandshake },
+  { id: 'hard' as const, label: 'Hard Skills', icon: Cpu },
 ];
 
 const SkillsSection = () => {
@@ -113,6 +118,24 @@ const SkillsSection = () => {
     return () => ctx.revert();
   }, []);
 
+  // After switching, the new cards slide in from the side that was picked
+  const gridRef = useRef<HTMLDivElement>(null);
+  const firstRender = useRef(true);
+  useLayoutEffect(() => {
+    if (firstRender.current) {
+      firstRender.current = false;
+      return;
+    }
+    const cards = gridRef.current?.children;
+    if (!cards?.length) return;
+    const from = activeTab === 'hard' ? 40 : -40;
+    gsap.fromTo(
+      cards,
+      { opacity: 0, x: from, filter: 'blur(6px)' },
+      { opacity: 1, x: 0, filter: 'blur(0px)', duration: 0.5, stagger: 0.05, ease: 'power3.out', clearProps: 'transform,filter' }
+    );
+  }, [activeTab]);
+
   const currentSkills = activeTab === 'soft' ? softSkills : hardSkills;
 
   return (
@@ -128,39 +151,47 @@ const SkillsSection = () => {
         <span className="font-mono text-xs tracking-[0.2em] uppercase text-[#708238] block mb-2">
           Expertise
         </span>
-        <h2 className="text-[clamp(34px,3.6vw,52px)] font-bold text-gradient mb-4">
+        <h2 className="text-[clamp(26px,2.5vw,36px)] font-bold text-gradient mb-4">
           Skills
         </h2>
-        <p className="text-[#a3b97a]/70 text-[clamp(14px,1.1vw,17px)] max-w-xl mx-auto leading-relaxed">
+        <p className="text-[#a3b97a]/70 text-[clamp(14px,1vw,15px)] max-w-xl mx-auto leading-relaxed">
           Technical competencies and soft skills aligned with QA, development, and data-focused roles.
         </p>
       </div>
 
-      <div ref={tabsRef} className="flex justify-center gap-4 mb-10">
-        <button
-          onClick={() => setActiveTab('soft')}
-          className={`skills-tab-btn px-6 py-3 rounded-full font-medium transition-all duration-300 ${
-            activeTab === 'soft'
-              ? 'bg-[#708238] text-[#0a0a0f] shadow-lg shadow-[#708238]/30'
-              : 'bg-[#708238]/10 text-[#a3b97a] border border-[#708238]/20 hover:bg-[#708238]/20'
-          }`}
+      {/* One switch: the olive thumb slides to whichever side is chosen */}
+      <div ref={tabsRef} className="flex justify-center mb-10">
+        <div
+          role="tablist"
+          aria-label="Skill type"
+          className="skills-switch relative grid grid-cols-2 rounded-full p-1.5"
+          onKeyDown={(e) => {
+            if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+            const next = e.key === 'ArrowRight' ? 1 : 0;
+            setActiveTab(SWITCH[next].id);
+            e.currentTarget.querySelectorAll<HTMLButtonElement>('[role="tab"]')[next]?.focus();
+          }}
         >
-          Soft Skills
-        </button>
-        <button
-          onClick={() => setActiveTab('hard')}
-          className={`skills-tab-btn px-6 py-3 rounded-full font-medium transition-all duration-300 ${
-            activeTab === 'hard'
-              ? 'bg-[#708238] text-[#0a0a0f] shadow-lg shadow-[#708238]/30'
-              : 'bg-[#708238]/10 text-[#a3b97a] border border-[#708238]/20 hover:bg-[#708238]/20'
-          }`}
-        >
-          Hard Skills
-        </button>
+          <span aria-hidden className="skills-switch__thumb" data-side={activeTab} />
+          {SWITCH.map((opt) => (
+            <button
+              key={opt.id}
+              type="button"
+              role="tab"
+              aria-selected={activeTab === opt.id}
+              tabIndex={activeTab === opt.id ? 0 : -1}
+              onClick={() => setActiveTab(opt.id)}
+              className="skills-switch__btn relative z-10 flex items-center justify-center gap-2 rounded-full px-6 py-2.5 font-semibold"
+            >
+              <opt.icon size={17} aria-hidden />
+              {opt.label}
+            </button>
+          ))}
+        </div>
       </div>
 
       <div ref={contentRef} className="max-w-4xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div ref={gridRef} key={activeTab} className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {currentSkills.map((skill, index) => (
             <div
               key={skill.name}
