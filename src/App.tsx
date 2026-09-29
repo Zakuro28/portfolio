@@ -1,79 +1,31 @@
-import { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Navigation from './components/Navigation';
-import AuraBackground from './components/AuraBackground';
-import TechMarquee from './components/TechMarquee';
-import HeroSection from './sections/HeroSection';
-import ProjectsSection from './sections/ProjectsSection';
-import WorkSection from './sections/WorkSection';
-import SkillsSection from './sections/SkillsSection';
-import ExtracurricularSection from './sections/ExtracurricularSection';
-import AchievementsSection from './sections/AchievementsSection';
-import VolunteerSection from './sections/VolunteerSection';
-import ContactSection from './sections/ContactSection';
+import { MotionConfig } from 'motion/react'
+import Nav from './components/Nav'
+import Hero from './components/Hero'
+import Stats from './components/Stats'
+import Work from './components/Work'
+import Process from './components/Process'
+import Experience from './components/Experience'
+import Skills from './components/Skills'
+import About from './components/About'
+import Contact from './components/Contact'
 
-gsap.registerPlugin(ScrollTrigger);
-
-/** Lights up whichever glass card the pointer is over, following the pointer */
-function useCardSpotlight() {
-  useEffect(() => {
-    if (!window.matchMedia('(hover: hover)').matches) return;
-    let lit: HTMLElement | null = null;
-    const onMove = (e: PointerEvent) => {
-      const card = (e.target as HTMLElement | null)?.closest<HTMLElement>('.card-glass') ?? null;
-      if (card !== lit) {
-        lit?.classList.remove('is-lit');
-        card?.classList.add('is-lit');
-        lit = card;
-      }
-      if (!card) return;
-      const r = card.getBoundingClientRect();
-      card.style.setProperty('--spot-x', `${e.clientX - r.left}px`);
-      card.style.setProperty('--spot-y', `${e.clientY - r.top}px`);
-    };
-    const onLeave = () => {
-      lit?.classList.remove('is-lit');
-      lit = null;
-    };
-    document.addEventListener('pointermove', onMove, { passive: true });
-    document.addEventListener('pointerleave', onLeave);
-    return () => {
-      document.removeEventListener('pointermove', onMove);
-      document.removeEventListener('pointerleave', onLeave);
-    };
-  }, []);
-}
-
-function App() {
-  const mainRef = useRef<HTMLDivElement>(null);
-  useCardSpotlight();
-
+export default function App() {
   return (
-    <div ref={mainRef} className="relative bg-[#0a0a0f] min-h-screen overflow-x-clip">
-      {/* Aurora behind everything */}
-      <AuraBackground />
-
-      {/* Grain overlay */}
-      <div className="grain-overlay" />
-
-      {/* Navigation */}
-      <Navigation />
-
-      {/* Sections */}
-      <main className="relative">
-        <HeroSection />
-        <TechMarquee />
-        <ProjectsSection />
-        <WorkSection />
-        <SkillsSection />
-        <ExtracurricularSection />
-        <AchievementsSection />
-        <VolunteerSection />
-        <ContactSection />
+    <MotionConfig reducedMotion="user">
+      <a href="#work" className="sr-only z-[60] rounded-full bg-ink px-4 py-2 text-paper focus:not-sr-only focus:fixed focus:top-3 focus:left-3">
+        Skip to my work
+      </a>
+      <Nav />
+      <main>
+        <Hero />
+        <Stats />
+        <Work />
+        <Process />
+        <Experience />
+        <Skills />
+        <About />
+        <Contact />
       </main>
-    </div>
-  );
+    </MotionConfig>
+  )
 }
-
-export default App;
