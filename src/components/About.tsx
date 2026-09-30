@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { motion, useScroll, useTransform } from 'motion/react'
+import { motion, useMotionValue, useScroll, useSpring, useTransform, type MotionValue } from 'motion/react'
 import { ArrowRight, Award, DraftingCompass, GraduationCap, Headset, MapPin, Monitor, Rocket, Trophy, Zap } from 'lucide-react'
 import Section from './Section'
 import { CountUp, DrawIcon, ScrollWords, Spotlight, Tilt } from './fx'
@@ -9,13 +9,18 @@ const ease = [0.16, 1, 0.3, 1] as const
 
 /** Little stickers that float around the photo */
 const STICKERS = [
-  { text: 'Best Trainee & Best Nestee', icon: Trophy, className: '-right-4 top-[58%] -rotate-2 bg-amber text-ink sm:-right-10', delay: 3 },
+  { text: 'Best Trainee & Best Nestee', icon: Trophy, className: '-right-3 bottom-16 rotate-3 bg-amber text-ink sm:-right-8', delay: 3 },
   { text: 'Graduated with honors', icon: GraduationCap, className: '-left-4 top-8 -rotate-6 bg-amber text-ink sm:-left-10', delay: 0 },
-  { text: 'Best Research Paper', icon: Award, className: '-right-3 bottom-16 rotate-3 bg-ink text-paper sm:-right-8', delay: 1.2 },
+  { text: 'Best Research Paper', icon: Award, className: '-right-4 top-[58%] -rotate-2 bg-ink text-paper sm:-right-10', delay: 1.2 },
   { text: 'EIM', icon: Zap, className: '-right-4 top-20 rotate-6 bg-olive text-paper sm:-right-7', delay: 0.6 },
   { text: 'IT', icon: Monitor, className: '-left-4 top-[45%] -rotate-3 bg-paper text-ink ring-1 ring-line sm:-left-7', delay: 1.8 },
   { text: 'AutoCAD', icon: DraftingCompass, className: '-left-3 bottom-6 -rotate-2 bg-[#d8745b] text-paper sm:-left-6', delay: 2.4 },
 ]
+
+/** Moves a layer with the mouse; bigger depth means it moves further */
+function useLayer(sx: MotionValue<number>, sy: MotionValue<number>, depth: number) {
+  return { x: useTransform(sx, (v) => v * depth), y: useTransform(sy, (v) => v * depth) }
+}
 
 export default function About() {
   const photo = useRef<HTMLElement>(null)
@@ -23,6 +28,15 @@ export default function About() {
   const { scrollYProgress } = useScroll({ target: photo, offset: ['start end', 'end start'] })
   const drift = useTransform(scrollYProgress, [0, 1], [40, -40])
   const back = useTransform(scrollYProgress, [0, 1], [-8, 6])
+  // Layers behind the photo shift with the mouse, each by a different amount, for depth
+  const mx = useMotionValue(0)
+  const my = useMotionValue(0)
+  const sx = useSpring(mx, { stiffness: 110, damping: 18 })
+  const sy = useSpring(my, { stiffness: 110, damping: 18 })
+  const blob = useLayer(sx, sy, -46)
+  const card = useLayer(sx, sy, -18)
+  const ring = useLayer(sx, sy, 26)
+  const spark = useLayer(sx, sy, 40)
 
   const facts = [
     { icon: MapPin, big: PERSON.location, small: 'Where I’m based', tint: 'bg-[#e6ecd9]' },
@@ -42,8 +56,33 @@ export default function About() {
           viewport={{ once: true, margin: '0px 0px -15% 0px' }}
           transition={{ type: 'spring', stiffness: 120, damping: 16 }}
         >
-          <div className="relative">
-            <motion.div className="absolute -inset-3 -z-10 rounded-[2rem] bg-linear-to-br from-[#dde6c4] to-[#f0dcae]" style={{ rotate: back }} aria-hidden />
+          <div
+            className="group/photo relative isolate"
+            onPointerMove={(e) => {
+              if (e.pointerType !== 'mouse') return
+              const r = e.currentTarget.getBoundingClientRect()
+              mx.set((e.clientX - r.left) / r.width - 0.5)
+              my.set((e.clientY - r.top) / r.height - 0.5)
+            }}
+            onPointerLeave={() => {
+              mx.set(0)
+              my.set(0)
+            }}
+          >
+            {/* A glowing blob that slowly changes shape */}
+            <motion.div className="photo-blob absolute -inset-12 -z-30" style={blob} aria-hidden />
+            {/* A slowly turning dashed ring with a little planet on it */}
+            <motion.div className="pointer-events-none absolute top-1/2 left-1/2 -z-20 aspect-square w-[135%] -translate-x-1/2 -translate-y-1/2" style={ring} aria-hidden>
+              <div className="photo-orbit size-full rounded-full border-2 border-dashed border-olive/30" />
+            </motion.div>
+            {/* The dotted card the photo sits on */}
+            <motion.div className="photo-card absolute -inset-3 -z-10 rounded-[2rem]" style={{ rotate: back, ...card }} aria-hidden />
+            {/* Sparkles */}
+            <motion.div className="pointer-events-none absolute inset-0 -z-10" style={spark} aria-hidden>
+              <span className="photo-spark -top-8 left-[18%] text-2xl" />
+              <span className="photo-spark top-[30%] -right-10 text-lg [animation-delay:-1.2s]" />
+              <span className="photo-spark -bottom-6 left-[55%] text-xl [animation-delay:-2.1s]" />
+            </motion.div>
             <motion.div style={{ y: drift }}>
               <Tilt className="rounded-[1.6rem]" max={10}>
                 <img src="/zacc.jpg" alt={PERSON.name} className="aspect-[4/5] w-full rounded-[1.6rem] object-cover object-[50%_30%] shadow-[0_24px_50px_-28px_rgba(27,42,31,0.6)]" />
