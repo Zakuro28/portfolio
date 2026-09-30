@@ -16,7 +16,7 @@ export type Project = {
   name: string
   kind: string
   url: string
-  repo: string
+  repo?: string
   image: string
   description: string
   tech: string[]
@@ -24,6 +24,16 @@ export type Project = {
 }
 
 export const PROJECTS: Project[] = [
+  {
+    name: 'Enriched Learning Labs',
+    kind: 'Client website, WordPress',
+    url: 'https://enrichedlearninglabs.com',
+    image: '/work/ellabs.jpg',
+    description:
+      'A full redesign for a preschool in Pasig City, with playful animation on every page and a shop sorted by category. Families get a portal to sign up, enroll their child, and check attendance, grades, payments and downloads. Staff get a dashboard of visitors, new families and enrollments.',
+    tech: ['WordPress', 'PHP', 'JavaScript', 'CSS'],
+    note: 'Client work, so the code is private.',
+  },
   {
     name: 'Kit',
     kind: 'Task board',
@@ -77,6 +87,9 @@ export const PROJECTS: Project[] = [
   },
 ]
 
+// Shown below all the projects
+export const PROJECTS_EARNED = { amount: 500000, label: 'Estimated total earned by all the projects above' }
+
 export type Job = { role: string; place: string; where: string; points: string[] }
 
 export const JOBS: Job[] = [
@@ -107,6 +120,7 @@ export const EDUCATION = {
   school: 'Western Mindanao State University, Zamboanga City',
   honors: ['Graduated with honors', 'Best Research Paper award'],
   earlier: 'TVL: Electrical Installation and Maintenance, senior high school track',
+  proficiency: ['EIM', 'IT', 'AutoCAD'],
 }
 
 export const SKILLS: { area: string; items: string[] }[] = [

@@ -8,6 +8,7 @@ import Experience from './components/Experience'
 import Skills from './components/Skills'
 import About from './components/About'
 import Contact from './components/Contact'
+import { Cursor } from './components/fx'
 
 export default function App() {
   return (
@@ -15,6 +16,7 @@ export default function App() {
       <a href="#work" className="sr-only z-[60] rounded-full bg-ink px-4 py-2 text-paper focus:not-sr-only focus:fixed focus:top-3 focus:left-3">
         Skip to my work
       </a>
+      <Cursor />
       <Nav />
       <main>
         <Hero />

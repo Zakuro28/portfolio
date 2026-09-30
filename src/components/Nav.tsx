@@ -49,7 +49,7 @@ export default function Nav() {
 
   return (
     <header className={`fixed inset-x-0 top-0 z-50 transition-[background,box-shadow] duration-300 ${scrolled || menu ? 'bg-sage/85 shadow-[0_1px_0_rgba(27,42,31,0.08)] backdrop-blur-md' : ''}`}>
-      <motion.div className="absolute inset-x-0 bottom-0 h-0.5 origin-left bg-olive" style={{ scaleX: progress }} aria-hidden />
+      <motion.div className="absolute inset-x-0 bottom-0 h-[3px] origin-left bg-linear-to-r from-olive via-amber to-[#d6e296]" style={{ scaleX: progress }} aria-hidden />
       <nav className="mx-auto flex h-16 max-w-6xl items-center gap-4 px-5 sm:px-8" aria-label="Main">
         <a href="#top" className="group flex items-center gap-2.5" aria-label="Zacc Bandahala, back to top">
           <motion.img

@@ -1,16 +1,16 @@
 import { useState, type FormEvent } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
 import { Check, Copy, Mail, Phone, Send } from 'lucide-react'
-import { FacebookIcon, GithubIcon, LinkedinIcon } from './BrandIcons'
-import { Magnetic, SplitReveal } from './fx'
+import { Magnetic, SplitReveal, VelocityMarquee } from './fx'
 import { PERSON } from '../content'
 
 const YEAR = new Date().getFullYear()
-const field = 'mt-1.5 w-full rounded-xl bg-paper px-4 py-3 text-ink ring-1 ring-line outline-none transition-shadow placeholder:text-muted/70 focus:ring-2 focus:ring-olive'
+const field = 'w-full rounded-xl bg-sage/60 px-4 pt-6 pb-2.5 text-ink ring-1 ring-line outline-none transition-[box-shadow,background-color] focus:bg-paper focus:ring-2 focus:ring-olive'
 
 export default function Contact() {
   const [copied, setCopied] = useState(false)
   const [error, setError] = useState('')
+  const [sending, setSending] = useState(false)
 
   const copyEmail = async () => {
     try {
@@ -32,18 +32,32 @@ export default function Contact() {
     setError('')
     const subject = encodeURIComponent(`Hello from ${name}`)
     const body = encodeURIComponent(message)
-    window.location.href = `mailto:${PERSON.email}?subject=${subject}&body=${body}`
+    // Let the paper plane fly off before the email app opens
+    setSending(true)
+    setTimeout(() => {
+      window.location.href = `mailto:${PERSON.email}?subject=${subject}&body=${body}`
+      setTimeout(() => setSending(false), 1200)
+    }, 650)
   }
 
   const links = [
-    { label: 'LinkedIn', value: 'Zcsalweemnharr Bandahala', href: PERSON.linkedin, icon: LinkedinIcon },
-    { label: 'GitHub', value: 'Zakuro28', href: PERSON.github, icon: GithubIcon },
-    { label: 'Facebook', value: 'whyzzky.engkoh', href: PERSON.facebook, icon: FacebookIcon },
+    { label: 'LinkedIn', value: 'Zcsalweemnharr Bandahala', href: PERSON.linkedin, logo: '/brands/linkedin.svg' },
+    { label: 'GitHub', value: 'Zakuro28', href: PERSON.github, logo: '/brands/github.svg' },
+    { label: 'Facebook', value: 'whyzzky.engkoh', href: PERSON.facebook, logo: '/brands/facebook.svg' },
   ]
 
   return (
-    <section id="contact" aria-labelledby="contact-title" className="bg-ink py-20 text-paper sm:py-28">
-      <div className="mx-auto grid max-w-6xl gap-14 px-5 sm:px-8 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
+    <section id="contact" aria-labelledby="contact-title" className="relative overflow-hidden bg-ink pb-20 text-paper sm:pb-28">
+      <div className="aurora-dark" aria-hidden />
+      <VelocityMarquee className="relative border-b border-paper/10 py-6 sm:py-8">
+        {['Let’s talk', 'Let’s build something', 'Say hello'].map((t) => (
+          <span key={t} className="flex items-center gap-8 pr-8 font-display text-5xl font-bold tracking-[-0.03em] text-transparent [-webkit-text-stroke:1.5px_rgba(248,250,245,0.35)] sm:text-7xl" aria-hidden>
+            {t}
+            <span className="text-amber [-webkit-text-stroke:0]">✦</span>
+          </span>
+        ))}
+      </VelocityMarquee>
+      <div className="relative mx-auto mt-16 grid sm:mt-20 max-w-6xl gap-14 px-5 sm:px-8 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
         <div>
           <SplitReveal id="contact-title" text="Have a role or a project in mind? Let’s talk." className="font-display text-[clamp(2rem,4vw,3.2rem)] leading-[1.04] font-bold tracking-[-0.03em]" />
           <p className="mt-4 max-w-md text-lg leading-relaxed text-paper/70">I reply to every message, usually within a day.</p>
@@ -66,8 +80,11 @@ export default function Contact() {
           <ul className="mt-8 flex flex-wrap gap-2">
             {links.map((l) => (
               <li key={l.label}>
-                <a href={l.href} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold text-paper/80 ring-1 ring-paper/15 transition-colors hover:bg-paper/10 hover:text-paper">
-                  <l.icon className="size-4" aria-hidden /> {l.label}
+                <a href={l.href} target="_blank" rel="noopener noreferrer" className="group flex items-center gap-2.5 rounded-full bg-paper/5 py-2 pr-4 pl-2 text-sm font-semibold text-paper/85 ring-1 ring-paper/15 transition-[background-color,transform,color] duration-300 hover:-translate-y-1 hover:bg-paper/12 hover:text-paper">
+                  <span className="grid size-8 place-items-center rounded-full bg-paper/10 transition-transform duration-500 group-hover:rotate-[360deg]">
+                    <img src={l.logo} alt="" className="size-4.5" />
+                  </span>
+                  {l.label}
                   <span className="sr-only">: {l.value}</span>
                 </a>
               </li>
@@ -86,13 +103,13 @@ export default function Contact() {
         >
           <h3 className="font-display text-xl font-bold">Send a message</h3>
           <p className="mt-1 text-sm text-muted">This opens your email app with your message ready to send.</p>
-          <label className="mt-6 block">
-            <span className="text-sm font-medium text-ink-soft">Your name</span>
-            <input name="name" autoComplete="name" placeholder="Maria Santos" className={field} />
+          <label className="float-field mt-6">
+            <input name="name" autoComplete="name" placeholder=" " className={field} />
+            <span>Your name</span>
           </label>
-          <label className="mt-4 block">
-            <span className="text-sm font-medium text-ink-soft">Message</span>
-            <textarea name="message" rows={5} placeholder="Tell me about the role or the project." className={`${field} resize-y`} />
+          <label className="float-field mt-4">
+            <textarea name="message" rows={5} placeholder=" " className={`${field} resize-y`} />
+            <span>Tell me about the role or the project</span>
           </label>
           <AnimatePresence>
             {error && (
@@ -102,9 +119,15 @@ export default function Contact() {
             )}
           </AnimatePresence>
           <Magnetic strength={0.12} className="mt-6 block w-full">
-            <button type="submit" className="group flex w-full items-center justify-center gap-2 rounded-full bg-ink py-3.5 font-semibold text-paper transition-colors hover:bg-olive-deep">
-              Send message
-              <Send className="size-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" aria-hidden />
+            <button type="submit" className="group relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-full bg-ink py-3.5 font-semibold text-paper transition-colors hover:bg-olive-deep">
+              <span aria-live="polite">{sending ? 'Opening your email…' : 'Send message'}</span>
+              <motion.span
+                animate={sending ? { x: 180, y: -70, rotate: 25, opacity: 0 } : { x: 0, y: 0, rotate: 0, opacity: 1 }}
+                transition={sending ? { duration: 0.7, ease: [0.5, 0, 0.75, 0] } : { duration: 0.3 }}
+                className="inline-grid"
+              >
+                <Send className="size-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" aria-hidden />
+              </motion.span>
             </button>
           </Magnetic>
         </motion.form>
