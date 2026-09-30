@@ -88,14 +88,15 @@ export const PROJECTS: Project[] = [
 ]
 
 // Shown below all the projects
-export const PROJECTS_EARNED = { amount: 500000, label: 'Estimated total earned by all the projects above' }
+export const PROJECTS_EARNED = { amount: 150000, label: 'Estimated total earned by all the projects above' }
 
-export type Job = { role: string; place: string; where: string; points: string[] }
+export type Job = { role: string; place: string; where: string; points: string[]; awards?: string[] }
 
 export const JOBS: Job[] = [
   {
     role: 'Chat Support Representative',
     place: 'SupportZebra',
+    awards: ['Best Trainee', 'Best Nestee'],
     where: 'Cagayan de Oro City',
     points: [
       'Handled several live chats at once, answering account, product, order and service questions while keeping response times on target.',

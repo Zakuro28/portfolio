@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'motion/react'
-import { ArrowRight, Award, DraftingCompass, GraduationCap, Headset, MapPin, Monitor, Rocket, Zap } from 'lucide-react'
+import { ArrowRight, Award, DraftingCompass, GraduationCap, Headset, MapPin, Monitor, Rocket, Trophy, Zap } from 'lucide-react'
 import Section from './Section'
 import { CountUp, DrawIcon, ScrollWords, Spotlight, Tilt } from './fx'
 import { EDUCATION, JOBS, PERSON, PROJECTS } from '../content'
@@ -9,6 +9,7 @@ const ease = [0.16, 1, 0.3, 1] as const
 
 /** Little stickers that float around the photo */
 const STICKERS = [
+  { text: 'Best Trainee & Best Nestee', icon: Trophy, className: '-right-4 top-[58%] -rotate-2 bg-amber text-ink sm:-right-10', delay: 3 },
   { text: 'Graduated with honors', icon: GraduationCap, className: '-left-4 top-8 -rotate-6 bg-amber text-ink sm:-left-10', delay: 0 },
   { text: 'Best Research Paper', icon: Award, className: '-right-3 bottom-16 rotate-3 bg-ink text-paper sm:-right-8', delay: 1.2 },
   { text: 'EIM', icon: Zap, className: '-right-4 top-20 rotate-6 bg-olive text-paper sm:-right-7', delay: 0.6 },

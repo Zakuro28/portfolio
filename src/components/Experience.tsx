@@ -20,6 +20,7 @@ const STOPS: Stop[] = [
     org: j.place,
     where: j.where,
     points: j.points,
+    badges: j.awards,
   })),
   {
     id: 'wmsu',
